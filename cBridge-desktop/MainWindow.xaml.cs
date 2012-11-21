@@ -21,23 +21,25 @@ namespace cBridge
     /// </summary>
     public partial class MainWindow : Window
     {
-        private float oldVolume;
+        private cBridgeHttpServer httpServer;
+        private static int port = 8080;
 
         public MainWindow()
         {
             InitializeComponent();
+            BroadcastCBridgeService();
+            SetUpHttpServer();
         }
 
-        private void handleCallEvent(string data)
+        private void BroadcastCBridgeService()
         {
-            if(data == "incoming_call")
-            {
-                oldVolume = VolumeControl.getCurrentVolume();
-                VolumeControl.setVolume(0.1F);
-            } else if(data == "call_ended")
-            {
-                VolumeControl.setVolume(oldVolume);
-            }
+               
         }
+
+        private void SetUpHttpServer()
+        {
+            httpServer = new cBridgeHttpServer(port);
+            httpServer.Start();
+        }        
     }
 }

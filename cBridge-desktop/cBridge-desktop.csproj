@@ -58,7 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="VolumeControl.cs" />
+    <Compile Include="cBridgeHttpServer.cs" />
+    <Compile Include="SocketHelper.cs" />
+    <Compile Include="VolumeController.cs" />
     <Compile Include="VolumeControlHelper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
