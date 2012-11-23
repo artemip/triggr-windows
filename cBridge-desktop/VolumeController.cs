@@ -52,12 +52,12 @@ namespace cBridge
 
         public void handleEvent(string data)
         {
-            if (data == "incoming_call")
+            if (data == "start_call")
             {
                 OldVolume = getCurrentVolume();
                 setVolume(0.05F);
             }
-            else if (data == "call_ended")
+            else if (data == "end_call")
             {
                 setVolume(OldVolume);
             }

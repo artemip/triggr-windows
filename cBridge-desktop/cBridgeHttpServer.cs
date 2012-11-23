@@ -47,9 +47,7 @@ namespace cBridge
             string fullURL = request.RawUrl;
             string evt = fullURL.Substring(fullURL.LastIndexOf('/') + 1);
 
-            VolumeController.controller.handleEvent(evt);
-
-            string responseString = "OK - " + evt;
+            string responseString = "OK - " + handleEvent(evt); ;
 
             byte[] buffer = Encoding.UTF8.GetBytes(responseString);
 
@@ -59,6 +57,19 @@ namespace cBridge
             output.Close();
 
             listener.BeginGetContext(ProcessRequest, listener);
-        }                  
+        }        
+        
+        private string handleEvent(String evt) 
+        {
+            if (evt == "verify")
+            {
+                return evt; //Make this return some confirmation token or some shat
+            }
+            else
+            {
+                VolumeController.controller.handleEvent(evt);
+                return evt;
+            }
+        }
     }
 }
