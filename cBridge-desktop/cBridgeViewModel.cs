@@ -16,15 +16,17 @@ namespace cBridge
 {
     class cBridgeViewModel : INotifyPropertyChanged
     {
-        private string _localServerAddress;
+        private string _deviceId;
         private cBridgeHttpServer _httpServer;
+        private cBridgeSocketServer _socketServer;
         private int _port;
              
 
         public cBridgeViewModel() {
+            DeviceID = new Random().Next(0, 10000).ToString(); //getLocalIP() + ":" + _port;
             _port = getFreeTCPPort();
-            SetUpHttpServer(_port);
-            LocalServerAddress = getLocalIP() + ":" + _port;
+            SetUpSocketServer(DeviceID);
+            SetUpHttpServer(_port);            
         }
 
         private int getFreeTCPPort()
@@ -56,13 +58,19 @@ namespace cBridge
         {
             _httpServer = new cBridgeHttpServer(port);
             _httpServer.Start();
-        }    
+        }
 
-        public string LocalServerAddress {
-            get { return _localServerAddress; }
+        private void SetUpSocketServer(string deviceId)
+        {
+            _socketServer = new cBridgeSocketServer(deviceId);
+            _socketServer.Start();
+        }
+
+        public string DeviceID {
+            get { return _deviceId; }
             set {
-                _localServerAddress = value;
-                NotifyPropertyChanged("LocalServerAddress");
+                _deviceId = value;
+                NotifyPropertyChanged("DeviceID");
             }
         }
 

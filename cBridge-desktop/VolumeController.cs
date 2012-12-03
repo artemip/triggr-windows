@@ -9,13 +9,11 @@ namespace cBridge
 {    
     class VolumeController
     {
-        public static volatile VolumeController controller = new VolumeController();
-
         private float oldVolume;
         private MMDeviceEnumerator DevEnum;
         private MMDevice device;
 
-        private VolumeController()
+        public VolumeController()
         {
             DevEnum = new MMDeviceEnumerator();
             device = DevEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
@@ -27,41 +25,25 @@ namespace cBridge
             set { oldVolume = (value > 100F) ? 100F : value; }
         }
 
-        public float getCurrentVolume()
+        public float Volume
         {
-            return device.AudioEndpointVolume.MasterVolumeLevelScalar;
-        }
-        
-        public void setVolume(float desiredVolume)
-        {
-            int numSteps = 100;
-            float initVolume = getCurrentVolume();
-            float stepAmount = Math.Abs(initVolume - desiredVolume) / numSteps;
+            get { return device.AudioEndpointVolume.MasterVolumeLevelScalar; }
+            set {
+                int numSteps = 100;
+                float initVolume = Volume;
+                float stepAmount = Math.Abs(initVolume - value) / numSteps;
 
-            bool lowerVolume = initVolume > desiredVolume;
+                bool lowerVolume = initVolume > value;
 
-            for (int i = 0; i < numSteps; ++i)
-            {
-                Thread.Sleep(5);
-                if (lowerVolume)
-                    device.AudioEndpointVolume.MasterVolumeLevelScalar -= stepAmount;
-                else
-                    device.AudioEndpointVolume.MasterVolumeLevelScalar += stepAmount;
+                for (int i = 0; i < numSteps; ++i)
+                {
+                    Thread.Sleep(5);
+                    if (lowerVolume)
+                        device.AudioEndpointVolume.MasterVolumeLevelScalar -= stepAmount;
+                    else
+                        device.AudioEndpointVolume.MasterVolumeLevelScalar += stepAmount;
+                }
             }
         }
-
-        public void handleEvent(string data)
-        {
-            if (data == "start_call")
-            {
-                OldVolume = getCurrentVolume();
-                setVolume(0.05F);
-            }
-            else if (data == "end_call")
-            {
-                setVolume(OldVolume);
-            }
-        }
-
     }
 }

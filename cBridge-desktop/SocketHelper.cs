@@ -5,45 +5,13 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace cBridge_desktop
+namespace cBridge
 {
-    /*
-        var socket = OpenSocketConnection("ec2-75-101-183-71.compute-1.amazonaws.com", 9090);
- 
-        if(socket == null)
-        {
-            addEventToList("Connection Failed.", eventsListBox);
-            return;
-        }
- 
-        addEventToList("Connected.", eventsListBox);
- 
-        while(socket.Connected)
-        {
-            Byte[] bytesReceived = new Byte[256];
- 
-            int bytes = 0;
-            string data = "";
- 
-            do
-            {
-                bytes = socket.Receive(bytesReceived, bytesReceived.Length, 0);
-                data = Encoding.ASCII.GetString(bytesReceived, 0, bytes);
-                    
-                handleCallEvent(data);
-            }
-            while (bytes > 0);
-        }
-    */
-
-     
     static class SocketHelper
     {
         public static Socket OpenSocketConnection(string server, int port)
          {
-             string request = "GET / HTTP/1.1\r\nHost: " + server +
-                 "\r\nConnection: Close\r\n\r\n";
-             Byte[] bytesSent = Encoding.ASCII.GetBytes(request);
+             //string request = "POST /add_device HTTP/1.1\r\nHost: " + server + "\r\nConnection: Close\r\n\r\n";
              
              // Create a socket connection with the specified server and port.
              Socket s = SocketHelper.ConnectSocket(server, port);
@@ -52,10 +20,16 @@ namespace cBridge_desktop
                  return null;
  
              // Send request to the server.
-             s.Send(bytesSent, bytesSent.Length, 0);
- 
+             //SendString(s, request);
+
              return s;
          }
+
+        public static void SendString(Socket socket, string data)
+        {
+            Byte[] bytesSent = Encoding.ASCII.GetBytes(data);
+            socket.Send(bytesSent, bytesSent.Length, 0);
+        }
 
 
         public static Socket ConnectSocket(string server, int port)
