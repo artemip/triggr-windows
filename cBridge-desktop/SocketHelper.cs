@@ -11,7 +11,7 @@ namespace cBridge
     {
         public static Socket OpenSocketConnection(string server, int port)
          {
-             //string request = "POST /add_device HTTP/1.1\r\nHost: " + server + "\r\nConnection: Close\r\n\r\n";
+             //string request = "POST / HTTP/1.1\r\nHost: " + server + "\r\nConnection: Close\r\n\r\n";
              
              // Create a socket connection with the specified server and port.
              Socket s = SocketHelper.ConnectSocket(server, port);

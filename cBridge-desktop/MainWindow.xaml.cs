@@ -28,8 +28,7 @@ namespace cBridge
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new cBridgeViewModel();
-            
+            DataContext = new cBridgeViewModel();            
         }          
     }
 }

@@ -27,7 +27,7 @@ namespace cBridge
                 }
 
                 //Registration
-                SocketHelper.SendString(socket, _deviceId);
+                SocketHelper.SendString(socket, _deviceId + "\r\n");
 
                 while (socket.Connected)
                 {

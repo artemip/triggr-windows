@@ -26,7 +26,7 @@ namespace cBridge
             DeviceID = new Random().Next(0, 10000).ToString(); //getLocalIP() + ":" + _port;
             _port = getFreeTCPPort();
             SetUpSocketServer(DeviceID);
-            SetUpHttpServer(_port);            
+            //SetUpHttpServer(_port);            
         }
 
         private int getFreeTCPPort()
