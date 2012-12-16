@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace cBridge
+namespace cbridge
 {
     internal class VolumeControlHelper
     {

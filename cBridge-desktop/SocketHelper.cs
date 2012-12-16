@@ -5,32 +5,25 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace cBridge
+namespace cbridge
 {
     static class SocketHelper
     {
         public static Socket OpenSocketConnection(string server, int port)
-         {
-             //string request = "POST / HTTP/1.1\r\nHost: " + server + "\r\nConnection: Close\r\n\r\n";
-             
-             // Create a socket connection with the specified server and port.
-             Socket s = SocketHelper.ConnectSocket(server, port);
- 
-             if (s == null)
-                 return null;
- 
-             // Send request to the server.
-             //SendString(s, request);
-
-             return s;
-         }
-
-        public static void SendString(Socket socket, string data)
         {
-            Byte[] bytesSent = Encoding.ASCII.GetBytes(data);
-            socket.Send(bytesSent, bytesSent.Length, 0);
-        }
+            //string request = "POST / HTTP/1.1\r\nHost: " + server + "\r\nConnection: Close\r\n\r\n";
+             
+            // Create a socket connection with the specified server and port.
+            Socket s = SocketHelper.ConnectSocket(server, port);
+ 
+            if (s == null)
+                return null;
+ 
+            // Send request to the server.
+            //SendString(s, request);
 
+            return s;
+        }
 
         public static Socket ConnectSocket(string server, int port)
         {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using CoreAudioApi;
 
-namespace cBridge
+namespace cbridge
 {    
     class VolumeController
     {
@@ -13,10 +13,22 @@ namespace cBridge
         private MMDeviceEnumerator DevEnum;
         private MMDevice device;
 
-        public VolumeController()
+        public static readonly VolumeController Controller = new VolumeController();
+
+        private VolumeController()
         {
             DevEnum = new MMDeviceEnumerator();
             device = DevEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+
+            //Hacks to update volume dynamically
+            new Thread(delegate()
+            {
+                while (true)
+                {
+                    Thread.Sleep(100);
+                    cBridgeViewModel.Model.VolumePercentage = (int)(Controller.Volume * 100);
+                }
+            }).Start();
         }
 
         public float OldVolume
@@ -27,7 +39,9 @@ namespace cBridge
 
         public float Volume
         {
-            get { return device.AudioEndpointVolume.MasterVolumeLevelScalar; }
+            get { 
+                return device.AudioEndpointVolume.MasterVolumeLevelScalar; 
+            }
             set {
                 int numSteps = 100;
                 float initVolume = Volume;

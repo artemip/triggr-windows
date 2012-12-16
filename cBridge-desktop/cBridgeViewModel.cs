@@ -12,21 +12,48 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
-namespace cBridge
+namespace cbridge
 {
     class cBridgeViewModel : INotifyPropertyChanged
     {
-        private string _deviceId;
+        public enum DeviceStatus { CALL_STARTED, CALL_ENDED, IDLE, NOT_CONNECTED }
+
+        private int _volume = -1;
+        private string _pairingId;
+        private bool _pairingModeEnabled = false;
         private cBridgeHttpServer _httpServer;
         private cBridgeSocketServer _socketServer;
         private int _port;
-             
+        private DeviceStatus _status = DeviceStatus.NOT_CONNECTED;
 
-        public cBridgeViewModel() {
-            DeviceID = new Random().Next(0, 10000).ToString(); //getLocalIP() + ":" + _port;
-            _port = getFreeTCPPort();
-            SetUpSocketServer(DeviceID);
-            //SetUpHttpServer(_port);            
+        public static volatile cBridgeViewModel Model = new cBridgeViewModel();
+
+        private cBridgeViewModel() {            
+            //_port = getFreeTCPPort();
+            SetUpSocketServer(getDeviceId());       
+        }
+
+        ~cBridgeViewModel()
+        {
+            if (_socketServer != null)
+            {
+                _socketServer.Stop();
+            }
+        }
+
+        private string getDeviceId()
+        {
+            string deviceId = Properties.Settings.Default.DeviceID;
+
+            if (deviceId == "")
+            {
+                Properties.Settings.Default.DeviceID = Guid.NewGuid().ToString();
+                Properties.Settings.Default.Save();
+
+                _pairingModeEnabled = true; //New device ID. Pairing mode is thereby enabled
+            }
+
+            return deviceId;
         }
 
         private int getFreeTCPPort()
@@ -37,23 +64,7 @@ namespace cBridge
             l.Stop();
             return port;
         }
-
-        private string getLocalIP() 
-        {
-            string localIP = "?";
-            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
-
-            foreach (IPAddress ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    localIP = ip.ToString();
-                }
-            }
-
-            return localIP;
-        }
-
+       
         private void SetUpHttpServer(int port)
         {
             _httpServer = new cBridgeHttpServer(port);
@@ -66,11 +77,79 @@ namespace cBridge
             _socketServer.Start();
         }
 
-        public string DeviceID {
-            get { return _deviceId; }
+        public bool PairingModeEnabled
+        {
+            get { return _pairingModeEnabled; }
+
+            set
+            {
+                if (value)
+                {
+                    PairingID = new Base62(new Random().Next(10000, 1000000000)).ToString();
+                    Status = DeviceStatus.NOT_CONNECTED;
+                    
+                    _socketServer.Send("pairing_id:" + PairingID + "\r\n");
+                }
+
+                _pairingModeEnabled = value;
+                NotifyPropertyChanged("PairingModeTextVisible");
+            }
+        }
+
+        public int VolumePercentage
+        {
+            get {
+                if (_volume == -1) 
+                    _volume = (int)(VolumeController.Controller.Volume * 100);
+                
+                return _volume; 
+            }
+            set 
+            {
+                _volume = value;
+                NotifyPropertyChanged("VolumePercentage");
+            }
+        }
+
+        public string StatusImage
+        {
+            get 
+            {                
+                switch (_status)
+                {
+                    case DeviceStatus.CALL_STARTED:
+                        return "images/call_started.png";
+                    case DeviceStatus.CALL_ENDED:
+                        return "images/call_ended.png";
+                    case DeviceStatus.NOT_CONNECTED:
+                        return "images/not_connected.png";
+                    default:
+                        return "images/device_idle.png";
+                }
+                
+            }            
+        }
+
+        public DeviceStatus Status
+        {
+            get { return _status; }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged("StatusImage");
+            }
+        }
+
+        public string PairingModeTextVisible
+        {
+            get { return (_pairingModeEnabled) ? "Visible" : "Hidden"; }
+        }
+
+        public string PairingID {
+            get { return _pairingId; }
             set {
-                _deviceId = value;
-                NotifyPropertyChanged("DeviceID");
+                _pairingId = value;
+                NotifyPropertyChanged("PairingID");
             }
         }
 

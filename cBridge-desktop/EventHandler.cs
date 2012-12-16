@@ -4,32 +4,32 @@ using System.Linq;
 using System.Text;
 
 
-namespace cBridge
+namespace cbridge
 {
     static class EventHandler
-    {
-        static volatile VolumeController controller = new VolumeController();
-
+    {        
         public static string handleEvent(string evt)
         {
-            if (evt == "verify")
-            {
-                return evt; //Make this return some confirmation token or some shat
-            }
-            else
-            {
-                if (evt == "start_call")
-                {
-                    controller.OldVolume = controller.Volume;
-                    controller.Volume = 0.05F;
-                }
-                else if (evt == "end_call")
-                {
-                    controller.Volume = controller.OldVolume;
-                }
+            switch(evt) {
+                case "start_call":
+                    cBridgeViewModel.Model.Status = cBridgeViewModel.DeviceStatus.CALL_STARTED;
+                    VolumeController.Controller.OldVolume = VolumeController.Controller.Volume;
+                    VolumeController.Controller.Volume = 0.05F;
+                    break;
+                case "end_call":
+                    cBridgeViewModel.Model.Status = cBridgeViewModel.DeviceStatus.CALL_ENDED;
+                    VolumeController.Controller.Volume = VolumeController.Controller.OldVolume;
+                    cBridgeViewModel.Model.Status = cBridgeViewModel.DeviceStatus.IDLE;
+                    break;
+                case "pairing_complete":
+                    cBridgeViewModel.Model.PairingModeEnabled = false;
+                    break;
+                default:
+                    break;
 
-                return evt;
             }
+
+            return evt;
         }      
     }
 }

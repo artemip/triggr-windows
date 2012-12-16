@@ -7,7 +7,7 @@ using System.IO;
 using System.Net;
 using System.Threading;
 
-namespace cBridge
+namespace cbridge
 {
     class cBridgeHttpServer {
 

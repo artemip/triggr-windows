@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Net;
 
-namespace cBridge
+namespace cbridge
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -28,7 +28,7 @@ namespace cBridge
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new cBridgeViewModel();            
+            DataContext = cBridgeViewModel.Model;
         }          
     }
 }
