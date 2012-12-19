@@ -160,6 +160,11 @@
     <Resource Include="images\not_connected.png" />
     <Resource Include="images\volume_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\get_pair_code_button.png" />
+    <Resource Include="images\get_pair_code_button_pressed.png" />
+    <Resource Include="images\pair_code_background.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -21,8 +21,9 @@ namespace cbridge
                     VolumeController.Controller.Volume = VolumeController.Controller.OldVolume;
                     cBridgeViewModel.Model.Status = cBridgeViewModel.DeviceStatus.IDLE;
                     break;
-                case "pairing_complete":
+                case "pairing_successful":
                     cBridgeViewModel.Model.PairingModeEnabled = false;
+                    cBridgeViewModel.Model.Status = cBridgeViewModel.DeviceStatus.IDLE;
                     break;
                 default:
                     break;

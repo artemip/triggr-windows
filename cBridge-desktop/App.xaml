@@ -3,6 +3,54 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
-    </Application.Resources>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="Segoe UI Light" />
+            <Setter Property="Foreground" Value="#FFA8A8A8" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderThickness="1, 1, 1, 1">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                    <GradientStop Color="#F8232222" Offset="0.0" />
+                                    <GradientStop Color="#E01F1E1E" Offset="0.5" />
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <Border BorderThickness="1, 0, 1, 1">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                        <GradientStop Color="#FF3B6BC2" Offset="0.0" />
+                                        <GradientStop Color="#FF355A9F" Offset="1.0" />
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                                <Button BorderThickness="0" FontSize="20" Foreground="White">
+                                    <Button.Content>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <ContentPresenter.Effect>
+                                                <DropShadowEffect
+                                                    ShadowDepth="0.8"
+                                                    Direction="270"
+                                                    Color="Black"
+                                                    Opacity="0.9"
+                                                    BlurRadius="0.7"/>    
+                                            </ContentPresenter.Effect>
+                                        </ContentPresenter>
+                                    </Button.Content>
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                            <GradientStop Color="#FF417CE8" Offset="0.0" />
+                                            <GradientStop Color="#FF3967BD" Offset="1.0" />
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>    
 </Application>

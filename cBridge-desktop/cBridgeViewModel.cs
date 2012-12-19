@@ -19,7 +19,7 @@ namespace cbridge
         public enum DeviceStatus { CALL_STARTED, CALL_ENDED, IDLE, NOT_CONNECTED }
 
         private int _volume = -1;
-        private string _pairingId;
+        private string _pairingKey;
         private bool _pairingModeEnabled = false;
         private cBridgeHttpServer _httpServer;
         private cBridgeSocketServer _socketServer;
@@ -30,7 +30,7 @@ namespace cbridge
 
         private cBridgeViewModel() {            
             //_port = getFreeTCPPort();
-            SetUpSocketServer(getDeviceId());       
+            //SetUpSocketServer(getDeviceId());       
         }
 
         ~cBridgeViewModel()
@@ -47,10 +47,14 @@ namespace cbridge
 
             if (deviceId == "")
             {
-                Properties.Settings.Default.DeviceID = Guid.NewGuid().ToString();
+                deviceId = Properties.Settings.Default.DeviceID = Guid.NewGuid().ToString();
                 Properties.Settings.Default.Save();
 
-                _pairingModeEnabled = true; //New device ID. Pairing mode is thereby enabled
+                //New device ID. Pairing mode is thereby enabled
+                _pairingKey = new Base62(new Random().Next(10000, 1000000000)).ToString();
+                _status = DeviceStatus.NOT_CONNECTED;
+
+                _socketServer.Send("pairing_id:" + _pairingKey + "\r\n");
             }
 
             return deviceId;
@@ -85,10 +89,10 @@ namespace cbridge
             {
                 if (value)
                 {
-                    PairingID = new Base62(new Random().Next(10000, 1000000000)).ToString();
+                    PairingKey = new Base62(new Random().Next(10000, 1000000000)).ToString();
                     Status = DeviceStatus.NOT_CONNECTED;
                     
-                    _socketServer.Send("pairing_id:" + PairingID + "\r\n");
+                    _socketServer.Send("pairing_id:" + PairingKey + "\r\n");
                 }
 
                 _pairingModeEnabled = value;
@@ -145,11 +149,11 @@ namespace cbridge
             get { return (_pairingModeEnabled) ? "Visible" : "Hidden"; }
         }
 
-        public string PairingID {
-            get { return _pairingId; }
+        public string PairingKey {
+            get { return _pairingKey; }
             set {
-                _pairingId = value;
-                NotifyPropertyChanged("PairingID");
+                _pairingKey = value;
+                NotifyPropertyChanged("PairingKey");
             }
         }
 
