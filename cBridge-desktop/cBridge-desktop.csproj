@@ -80,10 +80,20 @@
     <Compile Include="cBridgeHttpServer.cs" />
     <Compile Include="cBridgeSocketServer.cs" />
     <Compile Include="cBridgeViewModel.cs" />
+    <Compile Include="CircularProgressBar.xaml.cs">
+      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EventHandler.cs" />
+    <Compile Include="HeartbeatListener.cs" />
+    <Compile Include="InvertedVisibilityConverter.cs" />
     <Compile Include="SocketHelper.cs" />
+    <Compile Include="StatusToImagePathConverter.cs" />
     <Compile Include="VolumeController.cs" />
     <Compile Include="VolumeControlHelper.cs" />
+    <Page Include="CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

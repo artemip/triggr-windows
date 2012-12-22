@@ -47,7 +47,7 @@ namespace cbridge
             string fullURL = request.RawUrl;
             string evt = fullURL.Substring(fullURL.LastIndexOf('/') + 1);
 
-            string responseString = "OK - " + EventHandler.handleEvent(evt);
+            string responseString = "OK";
 
             byte[] buffer = Encoding.UTF8.GetBytes(responseString);
 

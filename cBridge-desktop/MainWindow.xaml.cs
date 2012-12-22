@@ -27,8 +27,19 @@ namespace cbridge
         
         public MainWindow()
         {
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(OnUnhandledException);
             InitializeComponent();
             DataContext = cBridgeViewModel.Model;
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            //Do logging
+        }
+
+        private void InitiatePairing(object sender, RoutedEventArgs e)
+        {
+            cBridgeViewModel.Model.PairingModeEnabled = true;
         }          
     }
 }

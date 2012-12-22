@@ -14,7 +14,15 @@ namespace cbridge
             //string request = "POST / HTTP/1.1\r\nHost: " + server + "\r\nConnection: Close\r\n\r\n";
              
             // Create a socket connection with the specified server and port.
-            Socket s = SocketHelper.ConnectSocket(server, port);
+            Socket s;
+            try
+            {
+                s = SocketHelper.ConnectSocket(server, port);
+            }
+            catch (SocketException e)
+            {
+                return null;
+            }
  
             if (s == null)
                 return null;

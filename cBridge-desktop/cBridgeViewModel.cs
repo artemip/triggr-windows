@@ -14,34 +14,33 @@ using System.Windows.Threading;
 
 namespace cbridge
 {
-    class cBridgeViewModel : INotifyPropertyChanged
-    {
-        public enum DeviceStatus { CALL_STARTED, CALL_ENDED, IDLE, NOT_CONNECTED }
+    public enum DeviceStatus { CALL_STARTED, CALL_ENDED, IDLE, NOT_CONNECTED }
 
+    class cBridgeViewModel : INotifyPropertyChanged
+    {        
         private int _volume = -1;
         private string _pairingKey;
         private bool _pairingModeEnabled = false;
+        private bool _serverConnected = false;
         private cBridgeHttpServer _httpServer;
-        private cBridgeSocketServer _socketServer;
-        private int _port;
         private DeviceStatus _status = DeviceStatus.NOT_CONNECTED;
 
         public static volatile cBridgeViewModel Model = new cBridgeViewModel();
 
         private cBridgeViewModel() {            
-            //_port = getFreeTCPPort();
-            //SetUpSocketServer(getDeviceId());       
+            _serverConnected = cBridgeSocketServer.Start();
+            HeartbeatListener.Start();
         }
 
         ~cBridgeViewModel()
         {
-            if (_socketServer != null)
+            if (cBridgeSocketServer.Started)
             {
-                _socketServer.Stop();
+                cBridgeSocketServer.Stop();
             }
         }
 
-        private string getDeviceId()
+        public static string DeviceId()
         {
             string deviceId = Properties.Settings.Default.DeviceID;
 
@@ -49,12 +48,6 @@ namespace cbridge
             {
                 deviceId = Properties.Settings.Default.DeviceID = Guid.NewGuid().ToString();
                 Properties.Settings.Default.Save();
-
-                //New device ID. Pairing mode is thereby enabled
-                _pairingKey = new Base62(new Random().Next(10000, 1000000000)).ToString();
-                _status = DeviceStatus.NOT_CONNECTED;
-
-                _socketServer.Send("pairing_id:" + _pairingKey + "\r\n");
             }
 
             return deviceId;
@@ -75,10 +68,12 @@ namespace cbridge
             _httpServer.Start();
         }
 
-        private void SetUpSocketServer(string deviceId)
-        {
-            _socketServer = new cBridgeSocketServer(deviceId);
-            _socketServer.Start();
+        public bool ServerConnected { 
+            get { return _serverConnected; }
+            set {
+                _serverConnected = value;
+                NotifyPropertyChanged("ServerConnected");
+            } 
         }
 
         public bool PairingModeEnabled
@@ -91,12 +86,12 @@ namespace cbridge
                 {
                     PairingKey = new Base62(new Random().Next(10000, 1000000000)).ToString();
                     Status = DeviceStatus.NOT_CONNECTED;
-                    
-                    _socketServer.Send("pairing_id:" + PairingKey + "\r\n");
+
+                    cBridgeSocketServer.Send("pairing_key:" + PairingKey + "\r\n");
                 }
 
                 _pairingModeEnabled = value;
-                NotifyPropertyChanged("PairingModeTextVisible");
+                NotifyPropertyChanged("PairingModeEnabled");
             }
         }
 
@@ -115,38 +110,14 @@ namespace cbridge
             }
         }
 
-        public string StatusImage
-        {
-            get 
-            {                
-                switch (_status)
-                {
-                    case DeviceStatus.CALL_STARTED:
-                        return "images/call_started.png";
-                    case DeviceStatus.CALL_ENDED:
-                        return "images/call_ended.png";
-                    case DeviceStatus.NOT_CONNECTED:
-                        return "images/not_connected.png";
-                    default:
-                        return "images/device_idle.png";
-                }
-                
-            }            
-        }
-
         public DeviceStatus Status
         {
             get { return _status; }
             set
             {
                 _status = value;
-                NotifyPropertyChanged("StatusImage");
+                NotifyPropertyChanged("Status");
             }
-        }
-
-        public string PairingModeTextVisible
-        {
-            get { return (_pairingModeEnabled) ? "Visible" : "Hidden"; }
         }
 
         public string PairingKey {

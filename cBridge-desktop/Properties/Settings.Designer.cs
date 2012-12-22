@@ -34,5 +34,17 @@ namespace cbridge.Properties {
                 this["DeviceID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PhoneID {
+            get {
+                return ((string)(this["PhoneID"]));
+            }
+            set {
+                this["PhoneID"] = value;
+            }
+        }
     }
 }

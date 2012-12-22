@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace cbridge
 {
+    #pragma warning disable
     internal class VolumeControlHelper
     {
         public const int MMSYSERR_NOERROR = 0;

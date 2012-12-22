@@ -7,7 +7,14 @@ using System.Net.Sockets;
 
 namespace cbridge
 {
-    class cBridgeSocketServer
+    public class SocketServerNotStartedException : Exception
+    {
+        public SocketServerNotStartedException(string message)
+            : base(message)
+        { }
+    }
+
+    static class cBridgeSocketServer
     {
         // State object for reading client data asynchronously
         private class StateObject
@@ -22,23 +29,23 @@ namespace cbridge
             public StringBuilder sb = new StringBuilder();
         }
 
-        private string _deviceId;
-        private Socket _socket;
+        private static string _deviceId = cBridgeViewModel.DeviceId();
+        private static Socket _socket;
+        private static bool _started;
 
-        public cBridgeSocketServer(string deviceId)
+        public static bool Start()
         {
-            _deviceId = deviceId;
-        }
+            if (_started) return true;
 
-        public void Start()
-        {
             _socket = SocketHelper.OpenSocketConnection("api.cbridgeapp.com", 9090);
-
 
             if (_socket == null)
             {
-                return;
+                _started = false;
+                return false;
             }
+
+            _started = true;
 
             StateObject state = new StateObject();
             state.workSocket = _socket;
@@ -46,18 +53,27 @@ namespace cbridge
             _socket.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state);
 
             Send("device_id:" + _deviceId + "\r\n");
+
+            return true;
         }
 
-        public void Stop()
+        public static bool Started
+        {
+            get { return _started; }
+        }
+
+        public static void Stop()
         {
             if (_socket != null)
             {
                 _socket.Shutdown(SocketShutdown.Both);
                 _socket.Close();
             }
+
+            _started = false;
         }
 
-        private void ReadCallback(IAsyncResult ar) 
+        private static void ReadCallback(IAsyncResult ar) 
         {
             string content = "";
 
@@ -79,28 +95,44 @@ namespace cbridge
                     EventHandler.handleEvent(content.Replace("\r\n", ""));
                     state.sb.Clear();
                 }
-                
+
                 socket.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state);
+            }
+            else //Socket has disconnected. Reconnect...
+            {
+                _started = cBridgeViewModel.Model.ServerConnected = false; //Inform the Model
+
+                Timer reconnectTimer = new Timer(x => { }, null, 0, 0);
+
+                reconnectTimer = new Timer(t =>
+                {
+                    if (Start()) //Socket has connected
+                    {
+                        cBridgeViewModel.Model.ServerConnected = true;
+                        reconnectTimer.Dispose();
+                    }
+                }, null, 0, 7000); //Retry every 5 seconds
+
             }
         }
 
-        public void Send(string data)
+        public static void Send(string data)
         {
+            while (!_started) Start();
             Send(_socket, data);
         }
 
-        private void Send(Socket socket, string data)
+        private static void Send(Socket socket, string data)
         {
             byte[] byteData = Encoding.ASCII.GetBytes(data);
 
             socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallback), socket);
         }
 
-        private void SendCallback(IAsyncResult ar)
+        private static void SendCallback(IAsyncResult ar)
         {
             var socket = (Socket) ar.AsyncState;
             var bytesSent = socket.EndSend(ar);            
         }
-
     }
 }
