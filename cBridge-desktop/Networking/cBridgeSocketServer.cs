@@ -64,13 +64,20 @@ namespace cbridge
 
         public static void Stop()
         {
-            if (_socket != null)
+            try
             {
-                _socket.Shutdown(SocketShutdown.Both);
+                if (_socket != null)
+                {
+                    _socket.Shutdown(SocketShutdown.Both);
+                   //socket.Close();
+                }
+
+                _started = false;
+            }
+            finally
+            {
                 _socket.Close();
             }
-
-            _started = false;
         }
 
         private static void ReadCallback(IAsyncResult ar) 
@@ -79,6 +86,8 @@ namespace cbridge
 
             var state = (StateObject) ar.AsyncState;
             var socket = state.workSocket;
+
+            if (!socket.Connected) return;
 
             int bytesRead = socket.EndReceive(ar);
 
@@ -92,7 +101,7 @@ namespace cbridge
                 content = state.sb.ToString();
                 if (content.IndexOf("\r\n") > -1)
                 {
-                    EventHandler.handleEvent(content.Replace("\r\n", ""));
+                    SocketEventHandler.HandleEvent(content.Replace("\r\n", ""));
                     state.sb.Clear();
                 }
 

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="cbridge.exe" version="1.0.0.1" publicKeyToken="9e378d6ba198979b" language="neutral" processorArchitecture="x86" type="win32" />
+  <description asmv2:iconFile="Resources\Images\favicon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="cbridge" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+    <commandLine file="cbridge.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="cbridge.exe" size="119296">
+      <assemblyIdentity name="cbridge" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>9RpRtnGwrfMHDbJSQVoBXyGUe00=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CoreAudioApi.dll" size="25600">
+      <assemblyIdentity name="CoreAudioApi" version="2.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>RJtDf/mRXJfHBQ/nN3AjYReCY3A=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="cbridge.exe.config" size="905">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>I6R8L9b6oFfd74KIYU4ApQS+Jr8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\Images\favicon.ico" size="1150">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>h5UA1/w8PN1jAeTYPsqV3S1Njnk=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=ARTEM-LAPTOP\Artem" issuerKeyHash="82e755c6b5b9a53879f75cd236f32981641bf6c5" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>xWwwCvWkhXXL3fje/sE3pPpcUjs=</DigestValue></Reference></SignedInfo><SignatureValue>Ts6aplV5CPQxEJ+ig+rcS5ICORnz2n5PLX+hNycnxtTBD/xzaGsX94pvQlD9pPYAK8Oc9kLuEHFGkqa3F2J9sa+RnqxsSaIUqyX5fV/9dKDbZuNsaCIcvW4lfdp9qoHK+6Mmo1Xj4jY76XORqrDf9ui3JnIpOySGG7KvdJdNfYA=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>oBUZPh/QdPMCTN7rmq/hPooACLF4eYD8XufreWCbAgESPpyTaPMRNowykqN/GecTkl+RFnUXCRo8CPcW1ob+4YnKRgaDGk+38M6lxzm1SSEXuFqm9IUejkDarwco0sxU+O/OypH2jcIEnjvpv9DXTLLWvJDclH3zc8J8uhm/mIk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="3b525cfaa437c1fedef8ddcb7585a4f50a306cc5" Description="" Url=""><as:assemblyIdentity name="cbridge.exe" version="1.0.0.1" publicKeyToken="9e378d6ba198979b" language="neutral" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=ARTEM-LAPTOP\Artem</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>X7av1rwEvDXZONpJGA5/mOW0UGE=</DigestValue></Reference></SignedInfo><SignatureValue>L1cpVtLu51NqUtZhvk7viynfwBcGfXRbyCGvxzxlQk7nATaNBQAEpqdjfDheq83IILx49IQW3dSsCwB+7Fiqh3i8iUqdVp6QEmivoZ/9rK4hE5+KIBDK+Y8oupxPj3sYvos9T+JJckykXksSID5nsQEc5Rcba6j8YXSPJExtw7I=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>oBUZPh/QdPMCTN7rmq/hPooACLF4eYD8XufreWCbAgESPpyTaPMRNowykqN/GecTkl+RFnUXCRo8CPcW1ob+4YnKRgaDGk+38M6lxzm1SSEXuFqm9IUejkDarwco0sxU+O/OypH2jcIEnjvpv9DXTLLWvJDclH3zc8J8uhm/mIk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB4TCCAUqgAwIBAgIQbL6rr9dSDqpDIiw1C8mB7TANBgkqhkiG9w0BAQUFADAvMS0wKwYDVQQDHiQAQQBSAFQARQBNAC0ATABBAFAAVABPAFAAXABBAHIAdABlAG0wHhcNMTIxMjI2MDQxMDIyWhcNMTMxMjI2MTAxMDIyWjAvMS0wKwYDVQQDHiQAQQBSAFQARQBNAC0ATABBAFAAVABPAFAAXABBAHIAdABlAG0wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKAVGT4f0HTzAkze65qv4T6KAAixeHmA/F7n63lgmwIBEj6ck2jzETaMMpKjfxnnE5JfkRZ1FwkaPAj3FtaG/uGJykYGgxpPt/DOpcc5tUkhF7hapvSFHo5A2q8HKNLMVPjvzsqR9o3CBJ476b/Q10yy1ryQ3JR983PCfLoZv5iJAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAEKpMqR/6KTMPGFFcBsNoTTxNyHOAF4lT96D4OPSixpnLS5rdatEgpRwNzacT83mUZHq4pU4HrHt8dt5Qiaugjtscfqe4Y7hfuMs9U8ZCerHJRfSY6qpWH6zN771dxS9u5ZI9deedzgaAuztHr8YSausB+bJTQ01ktM+WzFV17ZY=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

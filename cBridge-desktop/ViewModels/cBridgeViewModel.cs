@@ -16,7 +16,7 @@ namespace cbridge
 {
     public enum DeviceStatus { CALL_STARTED, CALL_ENDED, IDLE, NOT_CONNECTED }
 
-    class cBridgeViewModel : INotifyPropertyChanged
+    class cBridgeViewModel : INotifyPropertyChanged, IDisposable
     {        
         private int _volume = -1;
         private string _pairingKey;
@@ -25,19 +25,21 @@ namespace cbridge
         private cBridgeHttpServer _httpServer;
         private DeviceStatus _status = DeviceStatus.NOT_CONNECTED;
 
-        public static volatile cBridgeViewModel Model = new cBridgeViewModel();
+        public static cBridgeViewModel Model = new cBridgeViewModel();
 
         private cBridgeViewModel() {            
             _serverConnected = cBridgeSocketServer.Start();
             HeartbeatListener.Start();
         }
 
-        ~cBridgeViewModel()
+        public void Dispose()
         {
             if (cBridgeSocketServer.Started)
             {
                 cBridgeSocketServer.Stop();
             }
+            VolumeController.Controller.Dispose();
+            HeartbeatListener.Stop();
         }
 
         public static string DeviceId()
@@ -84,10 +86,19 @@ namespace cbridge
             {
                 if (value)
                 {
-                    PairingKey = new Base62(new Random().Next(10000, 1000000000)).ToString();
+                    HeartbeatListener.Stop();
+
+                    var key = new Base62(new Random().Next(1000000000)).ToString();
+                    var padding = new String('0', 5 - key.Length); //Add padding to make 5 characters
+
+                    PairingKey = padding + key;
                     Status = DeviceStatus.NOT_CONNECTED;
 
                     cBridgeSocketServer.Send("pairing_key:" + PairingKey + "\r\n");
+                }
+                else
+                {
+                    HeartbeatListener.Start();
                 }
 
                 _pairingModeEnabled = value;

@@ -2,6 +2,9 @@ using System;
 
 namespace cbridge
 {
+    /// <summary>
+    /// Convert a number to base 62 (0-9a-zA-Z)
+    /// </summary>
 	public struct Base62
 	{
 		private int	_value;

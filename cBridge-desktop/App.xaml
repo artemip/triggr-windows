@@ -1,64 +1,22 @@
 ﻿<Application x:Class="cbridge.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+            >
     <Application.Resources>
-        <Style TargetType="{x:Type Window}">
-            <Setter Property="FontFamily" Value="Segoe UI Light" />
-            <Setter Property="Foreground" Value="#FFA8A8A8" />
-            <Setter Property="FontWeight" Value="Bold" />
-        </Style>
-        <Style x:Key="CustomButtonStyle" TargetType="Button">
-            <Style.Resources>
-                <LinearGradientBrush x:Key="InnerBorderDeselectedGradient" StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Color="#FF3B6BC2" Offset="0.0" />
-                    <GradientStop Color="#FF355A9F" Offset="1.0" />
-                </LinearGradientBrush>
-                <LinearGradientBrush x:Key="InnerBorderSelectedGradient" StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Color="#FF35599C" Offset="0.0" />
-                    <GradientStop Color="#FF2E446E" Offset="1.0" />
-                </LinearGradientBrush>
-                <LinearGradientBrush x:Key="ButtonDeselectedGradient" StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Color="#FF417CE8" Offset="0.0" />
-                    <GradientStop Color="#FF3967BD" Offset="1.0" />
-                </LinearGradientBrush>
-                <LinearGradientBrush x:Key="ButtonSelectedGradient" StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Color="#FF365B9F" Offset="0.0" />
-                    <GradientStop Color="#FF314E84" Offset="1.0" />
-                </LinearGradientBrush>
-                <LinearGradientBrush x:Key="OuterBorderGradient" StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Color="#F8232222" Offset="0.0" />
-                    <GradientStop Color="#E01F1E1E" Offset="0.5" />
-                </LinearGradientBrush>
-            </Style.Resources>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Name="OuterBorder" CornerRadius="2, 2, 2, 2" BorderThickness="1, 1, 1, 1" Background="{StaticResource ButtonDeselectedGradient}" BorderBrush="{StaticResource OuterBorderGradient}">
-                            <Border Name="InnerBorder" CornerRadius="1, 1, 1, 1"  BorderThickness="1, 0, 1, 1" BorderBrush="{StaticResource InnerBorderDeselectedGradient}">
-                                <TextBlock Name="InnerText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="White">                            
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <ContentPresenter.Effect>
-                                            <DropShadowEffect
-                                                            ShadowDepth="0.8"
-                                                            Direction="270"
-                                                            Color="Black"
-                                                            Opacity="0.9"
-                                                            BlurRadius="0.7" />
-                                        </ContentPresenter.Effect>
-                                    </ContentPresenter>
-                                </TextBlock>
-                            </Border>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="OuterBorder" Property="Background" Value="{StaticResource ButtonSelectedGradient}" />
-                                <Setter TargetName="InnerBorder" Property="BorderBrush" Value="{StaticResource InnerBorderSelectedGradient}" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>            
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/ButtonStylesDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <Style TargetType="{x:Type Window}">
+                <Setter Property="FontFamily" Value="Segoe UI Light" />
+                <Setter Property="Foreground" Value="#FFA8A8A8" />
+                <Setter Property="FontWeight" Value="Bold" />
+            </Style>
+            
+            <BitmapImage x:Key="Icon" UriSource="/Resources/Images/favicon.ico" />
+            
+        </ResourceDictionary>
     </Application.Resources>    
 </Application>

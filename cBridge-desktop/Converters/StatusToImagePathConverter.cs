@@ -7,13 +7,16 @@ using System.Windows.Data;
 
 namespace cbridge
 {
+    /// <summary>
+    /// Convert a DeviceStatus to an image's source path
+    /// </summary>
     [ValueConversionAttribute(typeof(DeviceStatus), typeof(string))]
     class StatusToImagePathConverter : IValueConverter
     {
-        private string callStartedImagePath = "images/call_started.png";
-        private string callEndedImagePath = "images/call_ended.png";
-        private string notConnectedImagePath = "images/not_connected.png";
-        private string idleImagePath = "images/device_idle.png";
+        private string callStartedImagePath = @"..\Resources\Images\call_started.png";
+        private string callEndedImagePath = @"..\Resources\Images\call_ended.png";
+        private string notConnectedImagePath = @"..\Resources\Images\not_connected.png";
+        private string idleImagePath = @"..\Resources\Images\device_idle.png";
 
         public object Convert(object value, Type targetType,
             object parameter, CultureInfo culture)

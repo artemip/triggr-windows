@@ -8,6 +8,9 @@ using System.Windows.Data;
 
 namespace cbridge
 {
+    /// <summary>
+    /// Convert a boolean value to a Visibility (Visible/Collapsed)
+    /// </summary>
     [ValueConversionAttribute(typeof(bool), typeof(Visibility))]
     public class InvertedBoolToVisibilityConverter : IValueConverter
     {

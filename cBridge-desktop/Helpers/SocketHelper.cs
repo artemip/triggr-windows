@@ -9,6 +9,13 @@ namespace cbridge
 {
     static class SocketHelper
     {
+
+        /// <summary>
+        /// Open a socket connection
+        /// </summary>
+        /// <param name="server">Server path with which to bind</param>
+        /// <param name="port">Port on which to bind</param>
+        /// <returns>A socket object bound to the specified port on the specified server</returns>
         public static Socket OpenSocketConnection(string server, int port)
         {
             //string request = "POST / HTTP/1.1\r\nHost: " + server + "\r\nConnection: Close\r\n\r\n";
@@ -33,7 +40,7 @@ namespace cbridge
             return s;
         }
 
-        public static Socket ConnectSocket(string server, int port)
+        private static Socket ConnectSocket(string server, int port)
         {
             Socket s = null;
             IPHostEntry hostEntry = null;

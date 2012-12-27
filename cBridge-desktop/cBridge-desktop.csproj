@@ -15,6 +15,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,14 +26,15 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -42,16 +44,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>images\favicon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Images\favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>9507CE895179232450729AF5C523DB3B47CDCDB7</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>cBridge-desktop_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreAudioApi">
@@ -59,6 +74,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -76,25 +93,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Base62.cs" />
-    <Compile Include="cBridgeHttpServer.cs" />
-    <Compile Include="cBridgeSocketServer.cs" />
-    <Compile Include="cBridgeViewModel.cs" />
-    <Compile Include="CircularProgressBar.xaml.cs">
+    <Compile Include="Utilities\Base62.cs" />
+    <Compile Include="Networking\cBridgeHttpServer.cs" />
+    <Compile Include="Networking\cBridgeSocketServer.cs" />
+    <Compile Include="ViewModels\cBridgeViewModel.cs" />
+    <Compile Include="UserControls\CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EventHandler.cs" />
-    <Compile Include="HeartbeatListener.cs" />
-    <Compile Include="InvertedVisibilityConverter.cs" />
-    <Compile Include="SocketHelper.cs" />
-    <Compile Include="StatusToImagePathConverter.cs" />
-    <Compile Include="VolumeController.cs" />
-    <Compile Include="VolumeControlHelper.cs" />
-    <Page Include="CircularProgressBar.xaml">
+    <Compile Include="Helpers\EventHandler.cs" />
+    <Compile Include="Helpers\HeartbeatListener.cs" />
+    <Compile Include="Converters\InvertedVisibilityConverter.cs" />
+    <Compile Include="Windows\Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\SocketHelper.cs" />
+    <Compile Include="Converters\StatusToImagePathConverter.cs" />
+    <Compile Include="Helpers\VolumeController.cs" />
+    <Compile Include="Utilities\VolumeControlHelper.cs" />
+    <Page Include="Resources\Styles\ButtonStylesDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="UserControls\CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -102,10 +126,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\Notification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -126,6 +154,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="cBridge-desktop_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -133,7 +162,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\favicon.ico" />
+    <Resource Include="Resources\Images\favicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -158,23 +187,28 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\background.png" />
+    <Resource Include="Resources\Images\background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\triggr_logo.png" />
+    <Resource Include="Resources\Images\triggr_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\call_ended.png" />
-    <Resource Include="images\device_idle.png" />
-    <Resource Include="images\call_started.png" />
-    <Resource Include="images\not_connected.png" />
-    <Resource Include="images\volume_icon.png" />
+    <Resource Include="Resources\Images\call_ended.png" />
+    <Resource Include="Resources\Images\device_idle.png" />
+    <Resource Include="Resources\Images\call_started.png" />
+    <Resource Include="Resources\Images\not_connected.png" />
+    <Resource Include="Resources\Images\volume_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\get_pair_code_button.png" />
-    <Resource Include="images\get_pair_code_button_pressed.png" />
-    <Resource Include="images\pair_code_background.png" />
+    <Resource Include="Resources\Images\get_pair_code_button.png" />
+    <Resource Include="Resources\Images\get_pair_code_button_pressed.png" />
+    <Resource Include="Resources\Images\pair_code_background.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\call_ended_notification.png" />
+    <Resource Include="Resources\Images\call_started_notification.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
