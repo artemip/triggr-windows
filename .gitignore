@@ -8,3 +8,6 @@ TestResults
 _ReSharper*
 
 .suo
+
+#Setup project build
+Express
