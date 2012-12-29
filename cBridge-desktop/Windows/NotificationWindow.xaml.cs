@@ -20,9 +20,9 @@ namespace cbridge
     /// <summary>
     /// Interaction logic for Notification.xaml
     /// </summary>
-    public partial class Notification : Window
+    public partial class NotificationWindow : Window
     {
-        public Notification(NotificationType notificationType)
+        public NotificationWindow(NotificationType notificationType, string subscript = "")
         {
             InitializeComponent();
             BitmapImage notificationImageSource = null;
@@ -31,6 +31,7 @@ namespace cbridge
             {
                 case NotificationType.INCOMING_CALL:
                     notificationImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/call_started_notification.png"));
+                    NotificationSubtext.Text = subscript;
                     break;
                 case NotificationType.OUTGOING_CALL:
                     notificationImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/call_started_notification.png"));

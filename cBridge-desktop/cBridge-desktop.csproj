@@ -100,11 +100,11 @@
     <Compile Include="UserControls\CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\EventHandler.cs" />
+    <Compile Include="Helpers\SocketEventHandler.cs" />
     <Compile Include="Helpers\HeartbeatListener.cs" />
     <Compile Include="Converters\InvertedVisibilityConverter.cs" />
-    <Compile Include="Windows\Notification.xaml.cs">
-      <DependentUpon>Notification.xaml</DependentUpon>
+    <Compile Include="Windows\NotificationWindow.xaml.cs">
+      <DependentUpon>NotificationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SocketHelper.cs" />
     <Compile Include="Converters\StatusToImagePathConverter.cs" />
@@ -130,7 +130,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\Notification.xaml">
+    <Page Include="Windows\NotificationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
