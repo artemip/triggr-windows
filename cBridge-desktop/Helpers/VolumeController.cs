@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using CoreAudioApi;
 
-namespace cbridge
+namespace triggr
 {    
     /// <summary>
     /// Interfaces with the VolumeControllerHelper to perform volume-related tasks
@@ -33,7 +33,7 @@ namespace cbridge
                     while (true)
                     {
                         Thread.Sleep(60);
-                        cBridgeViewModel.Model.VolumePercentage = (int)(Controller.Volume * 100);
+                        TriggrViewModel.Model.VolumePercentage = (int)(Controller.Volume * 100);
                     }
                 });
             _volumeMonitor.Start();

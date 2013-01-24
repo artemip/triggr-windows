@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Data;
 
-namespace cbridge
+namespace triggr
 {
     /// <summary>
     /// Convert a DeviceStatus to an image's source path

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Net.Sockets;
 
-namespace cbridge
+namespace triggr
 {
     public class SocketServerNotStartedException : Exception
     {
@@ -14,7 +14,7 @@ namespace cbridge
         { }
     }
 
-    static class cBridgeSocketServer
+    static class TriggrSocketServer
     {
         // State object for reading client data asynchronously
         private class StateObject
@@ -29,7 +29,7 @@ namespace cbridge
             public StringBuilder sb = new StringBuilder();
         }
 
-        private static string _deviceId = cBridgeViewModel.DeviceId();
+        private static string _deviceId = TriggrViewModel.DeviceId();
         private static Socket _socket;
         private static bool _started;
 
@@ -109,7 +109,7 @@ namespace cbridge
             }
             else //Socket has disconnected. Reconnect...
             {
-                _started = cBridgeViewModel.Model.ServerConnected = false; //Inform the Model
+                _started = TriggrViewModel.Model.ServerConnected = false; //Inform the Model
 
                 Timer reconnectTimer = new Timer(x => { }, null, 0, 0);
 
@@ -117,7 +117,7 @@ namespace cbridge
                 {
                     if (Start()) //Socket has connected
                     {
-                        cBridgeViewModel.Model.ServerConnected = true;
+                        TriggrViewModel.Model.ServerConnected = true;
                         reconnectTimer.Dispose();
                     }
                 }, null, 0, 7000); //Retry every 5 seconds

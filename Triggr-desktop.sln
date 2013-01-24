@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cBridge-desktop", "cBridge-desktop\cBridge-desktop.csproj", "{5290F1D3-E38B-4C85-AAF9-8B3A95E6FF53}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggr-desktop", "cBridge-desktop\Triggr-desktop.csproj", "{5290F1D3-E38B-4C85-AAF9-8B3A95E6FF53}"
 EndProject
-Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "cbridgeSetup", "cbridgeSetup\cbridgeSetup.isproj", "{4D483849-9724-4BBB-993B-AAEC7D6ECA9C}"
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "TriggrSetup", "cbridgeSetup\TriggrSetup.isproj", "{4D483849-9724-4BBB-993B-AAEC7D6ECA9C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5290F1D3-E38B-4C85-AAF9-8B3A95E6FF53} = {5290F1D3-E38B-4C85-AAF9-8B3A95E6FF53}
 	EndProjectSection

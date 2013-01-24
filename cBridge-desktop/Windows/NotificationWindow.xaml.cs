@@ -13,7 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace cbridge
+namespace triggr
 {
     public enum NotificationType { INCOMING_CALL, OUTGOING_CALL, CALL_ENDED }
 

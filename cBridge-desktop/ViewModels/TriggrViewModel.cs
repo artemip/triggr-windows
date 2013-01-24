@@ -12,31 +12,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
-namespace cbridge
+namespace triggr
 {
     public enum DeviceStatus { CALL_STARTED, CALL_ENDED, IDLE, NOT_CONNECTED }
 
-    class cBridgeViewModel : INotifyPropertyChanged, IDisposable
+    class TriggrViewModel : INotifyPropertyChanged, IDisposable
     {        
         private int _volume = -1;
         private string _pairingKey;
         private bool _pairingModeEnabled = false;
         private bool _serverConnected = false;
-        private cBridgeHttpServer _httpServer;
+        private TriggrHttpServer _httpServer;
         private DeviceStatus _status = DeviceStatus.NOT_CONNECTED;
 
-        public static cBridgeViewModel Model = new cBridgeViewModel();
+        public static TriggrViewModel Model = new TriggrViewModel();
 
-        private cBridgeViewModel() {            
-            _serverConnected = cBridgeSocketServer.Start();
+        private TriggrViewModel() {            
+            _serverConnected = TriggrSocketServer.Start();
             HeartbeatListener.Start();
         }
 
         public void Dispose()
         {
-            if (cBridgeSocketServer.Started)
+            if (TriggrSocketServer.Started)
             {
-                cBridgeSocketServer.Stop();
+                TriggrSocketServer.Stop();
             }
             VolumeController.Controller.Dispose();
             HeartbeatListener.Stop();
@@ -66,7 +66,7 @@ namespace cbridge
        
         private void SetUpHttpServer(int port)
         {
-            _httpServer = new cBridgeHttpServer(port);
+            _httpServer = new TriggrHttpServer(port);
             _httpServer.Start();
         }
 
@@ -94,7 +94,7 @@ namespace cbridge
                     PairingKey = padding + key;
                     Status = DeviceStatus.NOT_CONNECTED;
 
-                    cBridgeSocketServer.Send("pairing_key:" + PairingKey + "\r\n");
+                    TriggrSocketServer.Send("pairing_key:" + PairingKey + "\r\n");
                 }
                 else
                 {

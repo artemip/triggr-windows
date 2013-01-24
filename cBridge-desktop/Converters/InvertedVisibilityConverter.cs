@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 
-namespace cbridge
+namespace triggr
 {
     /// <summary>
     /// Convert a boolean value to a Visibility (Visible/Collapsed)

@@ -8,8 +8,8 @@
     <ProjectGuid>{5290F1D3-E38B-4C85-AAF9-8B3A95E6FF53}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>cbridge</RootNamespace>
-    <AssemblyName>cbridge</AssemblyName>
+    <RootNamespace>triggr</RootNamespace>
+    <AssemblyName>triggr</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -94,9 +94,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Utilities\Base62.cs" />
-    <Compile Include="Networking\cBridgeHttpServer.cs" />
-    <Compile Include="Networking\cBridgeSocketServer.cs" />
-    <Compile Include="ViewModels\cBridgeViewModel.cs" />
+    <Compile Include="Networking\TriggrHttpServer.cs" />
+    <Compile Include="Networking\TriggrSocketServer.cs" />
+    <Compile Include="ViewModels\TriggrViewModel.cs" />
     <Compile Include="UserControls\CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
@@ -154,7 +154,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="cBridge-desktop_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

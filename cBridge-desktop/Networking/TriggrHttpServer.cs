@@ -7,14 +7,14 @@ using System.IO;
 using System.Net;
 using System.Threading;
 
-namespace cbridge
+namespace triggr
 {
-    class cBridgeHttpServer {
+    class TriggrHttpServer {
 
         private int _port;
         private HttpListener listener;
 
-        public cBridgeHttpServer(int port) {
+        public TriggrHttpServer(int port) {
             _port = port;                    
         }
 

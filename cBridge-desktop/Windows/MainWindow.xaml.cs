@@ -18,7 +18,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 
-namespace cbridge
+namespace triggr
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -32,7 +32,7 @@ namespace cbridge
         {
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(OnUnhandledException);
             InitializeComponent();
-            DataContext = cBridgeViewModel.Model;
+            DataContext = TriggrViewModel.Model;
 
             MainWindow.icon = new NotifyIcon();
 
@@ -71,7 +71,7 @@ namespace cbridge
             else
             {
                 icon.Visible = false;
-                cBridgeViewModel.Model.Dispose();
+                TriggrViewModel.Model.Dispose();
             }
         }
 
@@ -82,7 +82,7 @@ namespace cbridge
 
         private void InitiatePairing(object sender, RoutedEventArgs e)
         {
-            cBridgeViewModel.Model.PairingModeEnabled = true;
+            TriggrViewModel.Model.PairingModeEnabled = true;
         }          
     }
 }

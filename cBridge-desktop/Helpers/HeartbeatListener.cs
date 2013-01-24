@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace cbridge
+namespace triggr
 {
     static class HeartbeatListener
     {
@@ -26,13 +26,13 @@ namespace cbridge
 
                 if (pairedDeviceId != "")
                 {
-                    cBridgeSocketServer.Send("heartbeat_check:" + pairedDeviceId + "\r\n");
+                    TriggrSocketServer.Send("heartbeat_check:" + pairedDeviceId + "\r\n");
 
                     var timeoutTimer = new Timer(x =>
                     {
                         if (!_heartbeatFound)
                         {
-                            cBridgeViewModel.Model.Status = DeviceStatus.NOT_CONNECTED;
+                            TriggrViewModel.Model.Status = DeviceStatus.NOT_CONNECTED;
                         }
                     }, null, 10000, Timeout.Infinite); //10-second timeout. If no response from server, no heartbeat detected
                 }
@@ -62,7 +62,7 @@ namespace cbridge
                 _heartbeatFound = value;
                 if (value && _started)
                 {
-                    cBridgeViewModel.Model.Status = DeviceStatus.IDLE;
+                    TriggrViewModel.Model.Status = DeviceStatus.IDLE;
                 }
             }
         }

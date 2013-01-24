@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 
-namespace cbridge
+namespace triggr
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -19,7 +19,7 @@ namespace cbridge
             base.OnStartup(e);
 
             //Handle automatic startup
-            Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\", "cBridge", "\"" + Assembly.GetExecutingAssembly().Location + "\"", RegistryValueKind.String);
+            Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\", "Triggr", "\"" + Assembly.GetExecutingAssembly().Location + "\"", RegistryValueKind.String);
 
             //Open window
             var win = new MainWindow();

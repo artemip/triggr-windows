@@ -1,6 +1,6 @@
 using System;
 
-namespace cbridge
+namespace triggr
 {
     /// <summary>
     /// Convert a number to base 62 (0-9a-zA-Z)

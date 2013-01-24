@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Threading;
 
 
-namespace cbridge
+namespace triggr
 {
 
     /// <summary>
@@ -42,7 +42,7 @@ namespace cbridge
                     //Only if this is the first call
                     if (callCounter == 1)
                     {
-                        cBridgeViewModel.Model.Status = DeviceStatus.CALL_STARTED;
+                        TriggrViewModel.Model.Status = DeviceStatus.CALL_STARTED;
                         VolumeController.Controller.OldVolume = VolumeController.Controller.Volume;
                         VolumeController.Controller.Volume = 0.05F;
                     }
@@ -56,7 +56,7 @@ namespace cbridge
                     //Only if this is the first call
                     if (callCounter == 1)
                     {
-                        cBridgeViewModel.Model.Status = DeviceStatus.CALL_STARTED;
+                        TriggrViewModel.Model.Status = DeviceStatus.CALL_STARTED;
                         VolumeController.Controller.OldVolume = VolumeController.Controller.Volume;
                         VolumeController.Controller.Volume = 0.05F;
                     }
@@ -70,10 +70,10 @@ namespace cbridge
                     //Last call
                     if (callCounter == 0)
                     {
-                        cBridgeViewModel.Model.Status = DeviceStatus.CALL_ENDED;
+                        TriggrViewModel.Model.Status = DeviceStatus.CALL_ENDED;
                         VolumeController.Controller.Volume = VolumeController.Controller.OldVolume;
                         System.Threading.Thread.Sleep(1000);
-                        cBridgeViewModel.Model.Status = DeviceStatus.IDLE;
+                        TriggrViewModel.Model.Status = DeviceStatus.IDLE;
                     }
                 }
                 else if (Regex.IsMatch(evt, pairingSuccessfulEvent))  //Successful pairing
@@ -84,8 +84,8 @@ namespace cbridge
                     Properties.Settings.Default.PhoneID = phoneId;
                     Properties.Settings.Default.Save();
 
-                    cBridgeViewModel.Model.PairingModeEnabled = false;
-                    cBridgeViewModel.Model.Status = DeviceStatus.IDLE;
+                    TriggrViewModel.Model.PairingModeEnabled = false;
+                    TriggrViewModel.Model.Status = DeviceStatus.IDLE;
                 }
                 else if (Regex.IsMatch(evt, heartbeatEvent)) //Heartbeat
                 {
