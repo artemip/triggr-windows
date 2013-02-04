@@ -93,6 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\StatusToStringConverter.cs" />
     <Compile Include="Utilities\Base62.cs" />
     <Compile Include="Networking\TriggrHttpServer.cs" />
     <Compile Include="Networking\TriggrSocketServer.cs" />
@@ -207,7 +208,17 @@
     <Resource Include="Resources\Images\call_ended_notification.png" />
     <Resource Include="Resources\Images\call_started_notification.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\dock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\background2.png" />
+    <Resource Include="Resources\Images\TriggrLogo.png" />
+    <Resource Include="Resources\Images\volume_glyph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\triggr_icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

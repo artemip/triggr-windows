@@ -8,15 +8,14 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/ButtonStylesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
-            <Style TargetType="{x:Type Window}">
-                <Setter Property="FontFamily" Value="Segoe UI Light" />
-                <Setter Property="Foreground" Value="#FFA8A8A8" />
-                <Setter Property="FontWeight" Value="Bold" />
+
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="TextElement.FontFamily" Value="Segoe UI Light" />
+                <Setter Property="TextElement.FontWeight" Value="Bold" />
             </Style>
-            
+           
             <BitmapImage x:Key="Icon" UriSource="/Resources/Images/favicon.ico" />
             
         </ResourceDictionary>
-    </Application.Resources>    
+    </Application.Resources>
 </Application>

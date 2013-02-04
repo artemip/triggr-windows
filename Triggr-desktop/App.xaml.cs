@@ -23,7 +23,7 @@ namespace triggr
 
             //Open window
             var win = new MainWindow();
-            win.Closed += win_Closed;     
+            win.Closed += win_Closed;
         }
 
         void win_Closed(object sender, EventArgs e)

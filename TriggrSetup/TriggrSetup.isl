@@ -340,7 +340,7 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>Triggr_desktop.Primary_output</td><td>{1EB73C19-B058-405B-A652-21A5E0F1ADF3}</td><td>INSTALLDIR</td><td>2</td><td/><td>triggr_desktop.primary_outpu</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Triggr_desktop.Primary_output1</td><td>{75D4C48F-B513-4ED9-9204-96A0191C92DA}</td><td>INSTALLDIR</td><td>2</td><td/><td>triggr_desktop.primary_outpu1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1857,7 +1857,7 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
-		<row><td>AlwaysInstall</td><td>Triggr_desktop.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>Triggr_desktop.Primary_output1</td></row>
 	</table>
 
 	<table name="File">
@@ -1872,7 +1872,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>triggr_desktop.primary_outpu</td><td>Triggr_desktop.Primary_output</td><td>Triggr-desktop.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;Triggr-desktop&gt;|Built</td><td>3</td><td/></row>
+		<row><td>triggr_desktop.primary_outpu1</td><td>Triggr_desktop.Primary_output1</td><td>Triggr-desktop.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;Triggr-desktop1&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2129,7 +2129,7 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>Triggr_desktop.Primary_output</td><td/><td/><td>_980D6A63_5561_4F27_956B_71AFC816508C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Triggr_desktop.Primary_output1</td><td/><td/><td>_5868A4EC_E176_4A06_B931_D3612CE9C22B_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2449,6 +2449,7 @@
 		<row><td>ProgramFilesFolder</td><td/><td/><td>1</td></row>
 		<row><td>SystemFolder</td><td/><td/><td>1</td></row>
 		<row><td>Triggr-desktop</td><td>cBridge-desktop\Triggr-desktop.csproj</td><td/><td>2</td></row>
+		<row><td>Triggr-desktop1</td><td>Triggr-desktop\Triggr-desktop.csproj</td><td/><td>2</td></row>
 		<row><td>WindowsFolder</td><td/><td/><td>1</td></row>
 		<row><td>cBridge-desktop</td><td>cBridge-desktop\cBridge-desktop.csproj</td><td/><td>2</td></row>
 	</table>
