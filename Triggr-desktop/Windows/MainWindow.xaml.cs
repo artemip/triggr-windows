@@ -42,12 +42,19 @@ namespace triggr
             };
 
             var ctxMenu = new System.Windows.Forms.ContextMenu(menuItems);
-            
+
             icon.Click += new EventHandler(showWindow_Handler);
             icon.ContextMenu = ctxMenu;
             var iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/Resources/Images/favicon.ico")).Stream;
             icon.Icon = new System.Drawing.Icon(iconStream);
             icon.Visible = true;
+
+            if (Properties.Settings.Default.LastLaunch == null || DateTime.Now - Properties.Settings.Default.LastLaunch > TimeSpan.FromDays(30))
+            {
+                this.Show();
+            }
+
+            Properties.Settings.Default.LastLaunch = DateTime.Now;
         }
 
         private void showWindow_Handler(Object sender, EventArgs e)
@@ -75,6 +82,12 @@ namespace triggr
             }
         }
 
+        private void HandleHeaderMouseDown(Object sender,
+           MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             //Do logging
@@ -83,6 +96,11 @@ namespace triggr
         private void InitiatePairing(object sender, RoutedEventArgs e)
         {
             TriggrViewModel.Model.PairingModeEnabled = true;
-        }          
+        }
+
+        private void HandleCloseClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

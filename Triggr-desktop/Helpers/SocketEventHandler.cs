@@ -35,44 +35,55 @@ namespace triggr
             {
                 if (Regex.IsMatch(evt, incomingCallEvent)) //Incoming call
                 {
-                    startOnUIThread(displayIncomingCallNotification, evt.Split(':')[1]);
+                    var data = evt.Split(':')[1];
+                    var callerId = data.Split(',')[0];
+                    var callerName = data.Split(',')[1];
 
                     callCounter++;
+
+                    TriggrViewModel.Model.Status = DeviceStatus.CALL_STARTED;
+                    TriggrViewModel.Model.CallerId = callerId;
+                    TriggrViewModel.Model.CallerName = callerName;
+
+                    startOnUIThread(displayNotification);
 
                     //Only if this is the first call
                     if (callCounter == 1)
                     {
-                        TriggrViewModel.Model.Status = DeviceStatus.CALL_STARTED;
                         VolumeController.Controller.OldVolume = VolumeController.Controller.Volume;
                         VolumeController.Controller.Volume = 0.05F;
                     }
                 }
                 else if (Regex.IsMatch(evt, outgoingCallEvent)) //Outgoing call
                 {
-                    startOnUIThread(displayOutgoingCallNotification);
-
                     callCounter++;
+
+                    TriggrViewModel.Model.Status = DeviceStatus.CALL_STARTED;
+                    TriggrViewModel.Model.CallerName = "";
+                    TriggrViewModel.Model.CallerId = "";
+
+                    startOnUIThread(displayNotification);
 
                     //Only if this is the first call
                     if (callCounter == 1)
                     {
-                        TriggrViewModel.Model.Status = DeviceStatus.CALL_STARTED;
                         VolumeController.Controller.OldVolume = VolumeController.Controller.Volume;
                         VolumeController.Controller.Volume = 0.05F;
                     }
                 }
                 else if (Regex.IsMatch(evt, endCallEvent)) //End call
                 {
-                    startOnUIThread(displayEndCallNotification);
+                    startOnUIThread(displayNotification);
 
-                    callCounter--;
+                    if(callCounter > 0) callCounter--;
 
                     //Last call
                     if (callCounter == 0)
                     {
                         TriggrViewModel.Model.Status = DeviceStatus.CALL_ENDED;
+
                         VolumeController.Controller.Volume = VolumeController.Controller.OldVolume;
-                        System.Threading.Thread.Sleep(1000);
+                        System.Threading.Thread.Sleep(2000);
                         TriggrViewModel.Model.Status = DeviceStatus.IDLE;
                     }
                 }
@@ -86,6 +97,11 @@ namespace triggr
 
                     TriggrViewModel.Model.PairingModeEnabled = false;
                     TriggrViewModel.Model.Status = DeviceStatus.IDLE;
+
+                    TriggrViewModel.Model.CallerName = "Connected";
+                    TriggrViewModel.Model.CallerId = "";
+
+                    startOnUIThread(displayNotification);
                 }
                 else if (Regex.IsMatch(evt, heartbeatEvent)) //Heartbeat
                 {
@@ -95,30 +111,12 @@ namespace triggr
         }
 
         /// <summary>
-        /// Display a notification that a call is incoming
+        /// Display a notification
         /// </summary>
-        private static void displayIncomingCallNotification(string number)
+        private static void displayNotification()
         {
-            var notification = new NotificationWindow(NotificationType.INCOMING_CALL, number);
-            notification.ShowFor(TimeSpan.FromSeconds(4));
-        }
-
-        /// <summary>
-        /// Display a notification that a call is outgoing
-        /// </summary>
-        private static void displayOutgoingCallNotification()
-        {
-            var notification = new NotificationWindow(NotificationType.OUTGOING_CALL);
-            notification.ShowFor(TimeSpan.FromSeconds(4));
-        }
-
-        /// <summary>
-        /// Display a notification that a call has ended
-        /// </summary>
-        private static void displayEndCallNotification()
-        {
-            var notification = new NotificationWindow(NotificationType.CALL_ENDED);
-            notification.ShowFor(TimeSpan.FromSeconds(2));
+            var notification = new NotificationWindow();
+            notification.ShowFor(TimeSpan.FromSeconds(8));
         }
 
         /// <summary>

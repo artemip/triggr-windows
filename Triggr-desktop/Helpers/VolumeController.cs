@@ -53,7 +53,19 @@ namespace triggr
         public float Volume
         {
             get { 
-                return _device.AudioEndpointVolume.MasterVolumeLevelScalar; 
+                float vol = -1;
+                while (vol == -1)
+                {
+                    try
+                    {
+                        vol = _device.AudioEndpointVolume.MasterVolumeLevelScalar;
+                    }
+                    catch (InvalidCastException ex)
+                    {
+                    
+                    }
+                }
+                return vol;
             }
             set {
                 int numSteps = 100;

@@ -4,17 +4,23 @@
             >
     <Application.Resources>
         <ResourceDictionary>            
+            <Style x:Key="FontStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="Foreground" Value="#FFA8A8A8" />
+                <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
+            </Style>
+            <Style x:Key="ButtonFont" BasedOn="{StaticResource FontStyle}" TargetType="{x:Type Button}">
+                <Setter Property="TextElement.Foreground" Value="White" />
+            </Style>
+           
+            <BitmapImage x:Key="Icon" UriSource="/Resources/Images/favicon.ico" />
+            
+            <FontFamily x:Key="OpenSans">../Resources/Fonts/#OpenSans-Light</FontFamily>
             
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/ButtonStylesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="TextElement.FontFamily" Value="Segoe UI Light" />
-                <Setter Property="TextElement.FontWeight" Value="Bold" />
-            </Style>
-           
-            <BitmapImage x:Key="Icon" UriSource="/Resources/Images/favicon.ico" />
             
         </ResourceDictionary>
     </Application.Resources>

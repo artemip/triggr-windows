@@ -24,6 +24,8 @@ namespace triggr
         private bool _serverConnected = false;
         private TriggrHttpServer _httpServer;
         private DeviceStatus _status = DeviceStatus.NOT_CONNECTED;
+        private string _callerName;
+        private string _callerId;
 
         public static TriggrViewModel Model = new TriggrViewModel();
 
@@ -136,6 +138,25 @@ namespace triggr
             set {
                 _pairingKey = value;
                 NotifyPropertyChanged("PairingKey");
+            }
+        }
+
+        public string CallerName
+        {
+            get { return _callerName; }
+            set
+            {
+                _callerName = value;
+                NotifyPropertyChanged("CallerName");
+            }
+        }
+
+        public string CallerId
+        {
+            get { return _callerId; }
+            set {
+                _callerId = value;
+                NotifyPropertyChanged("CallerId");
             }
         }
 

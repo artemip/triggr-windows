@@ -1,10 +1,83 @@
 ﻿<Window x:Class="triggr.NotificationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Width="286" Height="115" Background="#00000000" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:l="clr-namespace:triggr"
+        Width="296" 
+        Height="78" 
+        Background="#EE272728" 
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType"
+        AllowsTransparency="True" 
+        WindowStyle="None" 
+        ResizeMode="NoResize" 
+        ShowInTaskbar="False" 
+        Topmost="True">
+    <Window.Resources>
+        <l:StatusToStringConverter x:Key="statusToStringConverter" />
+    </Window.Resources>
     <Grid>
-        <StackPanel>
-            <Image Name="NotificationImage" />
-            <TextBlock Name="NotificationSubtext"></TextBlock>
-        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="88" />
+                <ColumnDefinition Width="207" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderThickness="0, 0, 1, 0" BorderBrush="#FF202020">
+                <StackPanel>
+                    <Image 
+                        Source="../Resources/Images/triggr_icon.png" 
+                        Height="21"
+                        HorizontalAlignment="Left"
+                        Margin="11, 11, 0, 0" />
+                    <Grid Margin="11, 12, 0, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="36"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image 
+                            Grid.Column="0"
+                            Source="../Resources/Images/volume_glyph.png"
+                            Height="25"
+                            VerticalAlignment="Center"/>
+                        <TextBlock 
+                            Grid.Column="1"
+                            FontSize="18"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource FontStyle}">
+                            <Run Text="{Binding VolumePercentage}" /> <TextBlock Margin="-4, 0, 0, 0" Text="%" />
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" BorderThickness="1, 0, 0, 0" BorderBrush="#FF3E3E3E">
+                <StackPanel Margin="12, 4, 0, 4">
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Source="../Resources/Images/phone_glyph.png"
+                            Height="12"/>
+                        <TextBlock 
+                            HorizontalAlignment="Left" 
+                            FontSize="16"
+                            Style="{StaticResource FontStyle}">
+                            <Run Text="{Binding Status, Converter={StaticResource statusToStringConverter}}" />
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Margin="16, 0, 0, 0">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            FontSize="18"
+                            Style="{StaticResource FontStyle}"
+                            Foreground="#FF45adf5">
+                            <Run Text="{Binding CallerName}" />
+                        </TextBlock>
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            FontSize="16" 
+                            Style="{StaticResource FontStyle}">
+                            <Run Text="{Binding CallerId}" />
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

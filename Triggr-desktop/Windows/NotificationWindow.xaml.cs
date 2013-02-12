@@ -22,35 +22,17 @@ namespace triggr
     /// </summary>
     public partial class NotificationWindow : Window
     {
-        public NotificationWindow(NotificationType notificationType, string subscript = "")
+        public NotificationWindow()
         {
             InitializeComponent();
-            BitmapImage notificationImageSource = null;
-
-            switch (notificationType)
-            {
-                case NotificationType.INCOMING_CALL:
-                    notificationImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/call_started_notification.png"));
-                    NotificationSubtext.Text = subscript;
-                    break;
-                case NotificationType.OUTGOING_CALL:
-                    notificationImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/call_started_notification.png"));
-                    break;
-                case NotificationType.CALL_ENDED:
-                    notificationImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/call_ended_notification.png"));
-                    break;
-                default:
-                    break;
-            }
-
-            NotificationImage.Source = notificationImageSource;
+            DataContext = TriggrViewModel.Model;
 
             double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
             double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
             double windowWidth = this.Width;
             double windowHeight = this.Height;
-            this.Left = (screenWidth / 2) - (windowWidth / 2);
-            this.Top = 120;
+            this.Left = screenWidth - windowWidth - 8;
+            this.Top = 36;
         }
 
         private double fadeInDuration = 0.4;

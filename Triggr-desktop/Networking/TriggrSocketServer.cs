@@ -37,7 +37,7 @@ namespace triggr
         {
             if (_started) return true;
 
-            _socket = SocketHelper.OpenSocketConnection("api.cbridgeapp.com", 9090);
+            _socket = SocketHelper.OpenSocketConnection("api.triggrapp.com", 9090);
 
             if (_socket == null)
             {
