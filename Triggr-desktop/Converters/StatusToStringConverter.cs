@@ -13,7 +13,8 @@ namespace triggr
     [ValueConversionAttribute(typeof(DeviceStatus), typeof(string))]
     class StatusToStringConverter : IValueConverter
     {
-        private string callStartedString = "Incoming Call";
+        private string incomingCallString = "Incoming Call";
+        private string outgoingCallString = "Outgoing Call";
         private string callEndedString = "Call Ended";
         private string notConnectedString = "No Device";
         private string idleString = "Device Idle";
@@ -25,8 +26,10 @@ namespace triggr
 
             switch (v)
             {
-                case DeviceStatus.CALL_STARTED:
-                    return callStartedString;
+                case DeviceStatus.INCOMING_CALL:
+                    return incomingCallString;
+                case DeviceStatus.OUTGOING_CALL:
+                    return outgoingCallString;
                 case DeviceStatus.CALL_ENDED:
                     return callEndedString;
                 case DeviceStatus.NOT_CONNECTED:
@@ -41,9 +44,10 @@ namespace triggr
         {
             string statusString = (string)value;
 
-            if (statusString == callStartedString) return DeviceStatus.CALL_STARTED;
+            if (statusString == incomingCallString) return DeviceStatus.INCOMING_CALL;
+            else if (statusString == outgoingCallString) return DeviceStatus.OUTGOING_CALL;
             else if (statusString == callEndedString) return DeviceStatus.CALL_ENDED;
-            else  if (statusString == notConnectedString) return DeviceStatus.NOT_CONNECTED;
+            else if (statusString == notConnectedString) return DeviceStatus.NOT_CONNECTED;
             else return DeviceStatus.IDLE;
         }
     }

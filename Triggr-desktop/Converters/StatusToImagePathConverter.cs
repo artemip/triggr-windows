@@ -25,8 +25,10 @@ namespace triggr
 
             switch (v)
             {
-                case DeviceStatus.CALL_STARTED:
+                case DeviceStatus.INCOMING_CALL:
                     return callStartedImagePath;
+                case DeviceStatus.OUTGOING_CALL:
+                    return callStartedImagePath;            
                 case DeviceStatus.CALL_ENDED:
                     return callEndedImagePath;
                 case DeviceStatus.NOT_CONNECTED:
@@ -41,7 +43,7 @@ namespace triggr
         {
             string imagePath = (string)value;
 
-            if (imagePath == callStartedImagePath) return DeviceStatus.CALL_STARTED;
+            if (imagePath == callStartedImagePath) return DeviceStatus.INCOMING_CALL;
             else if (imagePath == callEndedImagePath) return DeviceStatus.CALL_ENDED;
             else  if (imagePath == notConnectedImagePath) return DeviceStatus.NOT_CONNECTED;
             else return DeviceStatus.IDLE;

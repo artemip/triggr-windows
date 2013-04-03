@@ -46,7 +46,7 @@
                     <Grid 
                         Name="ChromeTop"
                         Height="28"
-                        Background="#0B0B0B"
+                        Background="#BB0B0B0B"
                         MouseDown="HandleHeaderMouseDown">
                         <Button
                             HorizontalAlignment="Right"

@@ -55,6 +55,7 @@ namespace triggr
             }
 
             Properties.Settings.Default.LastLaunch = DateTime.Now;
+            Properties.Settings.Default.Save();
         }
 
         private void showWindow_Handler(Object sender, EventArgs e)

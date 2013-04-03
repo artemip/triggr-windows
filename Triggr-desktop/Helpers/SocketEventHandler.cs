@@ -17,10 +17,11 @@ namespace triggr
     static class SocketEventHandler
     {
         private static string incomingCallEvent = "incoming_call:(.*)";
-        private static string outgoingCallEvent = "outgoing_call";
+        private static string outgoingCallEvent = "outgoing_call:(.*)";
         private static string endCallEvent = "end_call";
         private static string pairingSuccessfulEvent = "pairing_successful:(.*)";
         private static string heartbeatEvent = "paired_device_heartbeat";
+        private static string disconnectEvent = "paired_device_disconnected";
 
         private static int callCounter = 0;
         private static Object eventLock = new Object();
@@ -41,7 +42,7 @@ namespace triggr
 
                     callCounter++;
 
-                    TriggrViewModel.Model.Status = DeviceStatus.CALL_STARTED;
+                    TriggrViewModel.Model.Status = DeviceStatus.INCOMING_CALL;
                     TriggrViewModel.Model.CallerId = callerId;
                     TriggrViewModel.Model.CallerName = callerName;
 
@@ -56,11 +57,15 @@ namespace triggr
                 }
                 else if (Regex.IsMatch(evt, outgoingCallEvent)) //Outgoing call
                 {
+                    var data = evt.Split(':')[1];
+                    var callerId = data.Split(',')[0];
+                    var callerName = data.Split(',')[1];
+
                     callCounter++;
 
-                    TriggrViewModel.Model.Status = DeviceStatus.CALL_STARTED;
-                    TriggrViewModel.Model.CallerName = "";
-                    TriggrViewModel.Model.CallerId = "";
+                    TriggrViewModel.Model.Status = DeviceStatus.OUTGOING_CALL;
+                    TriggrViewModel.Model.CallerName = callerName;
+                    TriggrViewModel.Model.CallerId = callerId;
 
                     startOnUIThread(displayNotification);
 
@@ -107,13 +112,26 @@ namespace triggr
                 {
                     HeartbeatListener.HeartbeatFound = true;
                 }
+                else if (Regex.IsMatch(evt, disconnectEvent))
+                {
+                    HeartbeatListener.HeartbeatFound = false;
+                    Properties.Settings.Default.PhoneID = "";
+                    Properties.Settings.Default.Save();
+
+                    TriggrViewModel.Model.Status = DeviceStatus.NOT_CONNECTED;
+
+                    TriggrViewModel.Model.CallerName = "Disconnected";
+                    TriggrViewModel.Model.CallerId = "";
+
+                    startOnUIThread(displayNotification);
+                }
             }
         }
 
         /// <summary>
         /// Display a notification
         /// </summary>
-        private static void displayNotification()
+        public static void displayNotification()
         {
             var notification = new NotificationWindow();
             notification.ShowFor(TimeSpan.FromSeconds(8));
@@ -123,7 +141,7 @@ namespace triggr
         /// Start the specified action on the UI thread
         /// </summary>
         /// <param name="targetMethod"></param>
-        private static void startOnUIThread(Action targetMethod)
+        public static void startOnUIThread(Action targetMethod)
         {
             var context = new DispatcherSynchronizationContext(Application.Current.Dispatcher);
             context.Post((state) => targetMethod(), null);

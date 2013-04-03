@@ -14,7 +14,7 @@ using System.Windows.Threading;
 
 namespace triggr
 {
-    public enum DeviceStatus { CALL_STARTED, CALL_ENDED, IDLE, NOT_CONNECTED }
+    public enum DeviceStatus { INCOMING_CALL, OUTGOING_CALL, CALL_ENDED, IDLE, NOT_CONNECTED }
 
     class TriggrViewModel : INotifyPropertyChanged, IDisposable
     {        
