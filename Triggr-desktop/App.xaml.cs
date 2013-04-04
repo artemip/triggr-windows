@@ -15,10 +15,17 @@ namespace triggr
     public partial class App : Application
     {
         System.Threading.Mutex mutex = null;
+        bool allowApp = false;
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            mutex = new System.Threading.Mutex(true, "triggrapp");
+            mutex = new System.Threading.Mutex(true, "triggrapp", out allowApp);
+
+            if (!allowApp)
+            {
+                this.Shutdown(1);
+                mutex.ReleaseMutex();
+            }
 
             base.OnStartup(e);
 

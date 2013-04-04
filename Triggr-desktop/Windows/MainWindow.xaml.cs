@@ -51,6 +51,8 @@ namespace triggr
 
             if (Properties.Settings.Default.LastLaunch == null || DateTime.Now - Properties.Settings.Default.LastLaunch > TimeSpan.FromDays(30))
             {
+                Properties.Settings.Default.Reset();
+                Properties.Settings.Default.Save();
                 this.Show();
             }
 

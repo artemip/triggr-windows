@@ -36,41 +36,41 @@ namespace triggr
             (MIXERCONTROL_CONTROLTYPE_FADER + 1);
 
 
-        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Portability", "CA1901:PInvokeDeclarationsShouldBePortable", MessageId = "0"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1060:MovePInvokesToNativeMethodsClass"), DllImport("winmm.dll", CharSet = CharSet.Ansi)]
         private static extern int mixerClose(int hmx);
 
-        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1060:MovePInvokesToNativeMethodsClass"), DllImport("winmm.dll", CharSet = CharSet.Ansi)]
         private static extern int mixerGetControlDetailsA(int hmxobj, ref
                                                                           MIXERCONTROLDETAILS pmxcd, int fdwDetails);
 
-        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1060:MovePInvokesToNativeMethodsClass"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA2101:SpecifyMarshalingForPInvokeStringArguments", MessageId = "MIXERCAPS.szPname"), DllImport("winmm.dll", CharSet = CharSet.Ansi)]
         private static extern int mixerGetDevCapsA(int uMxId, MIXERCAPS
                                                                   pmxcaps, int cbmxcaps);
 
-        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1060:MovePInvokesToNativeMethodsClass"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Portability", "CA1901:PInvokeDeclarationsShouldBePortable", MessageId = "0"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Portability", "CA1901:PInvokeDeclarationsShouldBePortable", MessageId = "1"), DllImport("winmm.dll", CharSet = CharSet.Ansi)]
         private static extern int mixerGetID(int hmxobj, int pumxID, int
                                                                          fdwId);
 
-        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1060:MovePInvokesToNativeMethodsClass"), DllImport("winmm.dll", CharSet = CharSet.Ansi)]
         private static extern int mixerGetLineControlsA(int hmxobj, ref
                                                                         MIXERLINECONTROLS pmxlc, int fdwControls);
 
-        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1060:MovePInvokesToNativeMethodsClass"), DllImport("winmm.dll", CharSet = CharSet.Ansi)]
         private static extern int mixerGetLineInfoA(int hmxobj, ref
                                                                     MIXERLINE pmxl, int fdwInfo);
 
-        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1060:MovePInvokesToNativeMethodsClass"), DllImport("winmm.dll", CharSet = CharSet.Ansi)]
         private static extern int mixerGetNumDevs();
 
-        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1060:MovePInvokesToNativeMethodsClass"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Portability", "CA1901:PInvokeDeclarationsShouldBePortable", MessageId = "0"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Portability", "CA1901:PInvokeDeclarationsShouldBePortable", MessageId = "2"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Portability", "CA1901:PInvokeDeclarationsShouldBePortable", MessageId = "3"), DllImport("winmm.dll", CharSet = CharSet.Ansi)]
         private static extern int mixerMessage(int hmx, int uMsg, int
                                                                       dwParam1, int dwParam2);
 
-        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1060:MovePInvokesToNativeMethodsClass"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Portability", "CA1901:PInvokeDeclarationsShouldBePortable", MessageId = "2"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Portability", "CA1901:PInvokeDeclarationsShouldBePortable", MessageId = "3"), DllImport("winmm.dll", CharSet = CharSet.Ansi)]
         private static extern int mixerOpen(out int phmx, int uMxId,
                                             int dwCallback, int dwInstance, int fdwOpen);
 
-        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1060:MovePInvokesToNativeMethodsClass"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Portability", "CA1901:PInvokeDeclarationsShouldBePortable", MessageId = "0"), DllImport("winmm.dll", CharSet = CharSet.Ansi)]
         private static extern int mixerSetControlDetails(int hmxobj, ref
                                                                          MIXERCONTROLDETAILS pmxcd, int fdwDetails);
 
@@ -117,6 +117,7 @@ namespace triggr
         }
 
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1049:TypesThatOwnNativeResourcesShouldBeDisposable")]
         public struct MIXERCONTROLDETAILS
         {
             public int cbStruct;
@@ -181,6 +182,7 @@ namespace triggr
         }
 
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1049:TypesThatOwnNativeResourcesShouldBeDisposable")]
         public struct MIXERLINECONTROLS
         {
             public int cbStruct;
