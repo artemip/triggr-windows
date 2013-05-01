@@ -14,18 +14,24 @@ namespace triggr
     /// </summary>
     public partial class App : Application
     {
-        System.Threading.Mutex mutex = null;
-        bool allowApp = false;
-
+        [DllImport("user32.dll")]
+        private static extern Boolean ShowWindow(IntPtr hWnd, Int32 nCmdShow);
+        
         protected override void OnStartup(StartupEventArgs e)
         {
-            mutex = new System.Threading.Mutex(true, "triggrapp", out allowApp);
-
-            if (!allowApp)
+            Process currentProcess = Process.GetCurrentProcess();
+            var runningProcess = (from process in Process.GetProcesses()
+                                  where
+                                    process.Id != currentProcess.Id &&
+                                    process.ProcessName.Equals(
+                                      currentProcess.ProcessName,
+                                      StringComparison.Ordinal)
+                                  select process).FirstOrDefault();
+            if (runningProcess != null)
             {
-                this.Shutdown(1);
-                mutex.ReleaseMutex();
-            }
+                ShowWindow(runningProcess.MainWindowHandle, SW_SHOWMAXIMIZED);
+                return; 
+            }            
 
             base.OnStartup(e);
 
