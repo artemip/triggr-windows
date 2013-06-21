@@ -90,11 +90,10 @@ namespace triggr
                 {
                     HeartbeatListener.Stop();
 
-                    var key = new Base62(new Random().Next(1000000000)).ToString();
+                    var key = new Base62(new Random().Next((int)Math.Pow(62, 5))).ToString(); // Base-62 * 5 characters
                     var padding = new String('0', 5 - key.Length); //Add padding to make 5 characters
 
                     PairingKey = padding + key;
-                    Status = DeviceStatus.NOT_CONNECTED;
 
                     TriggrSocketServer.Send("pairing_key:" + PairingKey + "\r\n");
                 }

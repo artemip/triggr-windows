@@ -55,8 +55,7 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>triggr_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>9507CE895179232450729AF5C523DB3B47CDCDB7</ManifestCertificateThumbprint>
@@ -228,6 +227,7 @@
     <Resource Include="Resources\Images\triggr_icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="triggr_icon.ico" />
     <Resource Include="Resources\Images\close_glyph.png" />
     <Resource Include="Resources\Images\message_glyph.png" />
     <Resource Include="Resources\Images\phone_glyph.png" />

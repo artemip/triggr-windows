@@ -34,6 +34,10 @@ namespace triggr
                         {
                             TriggrViewModel.Model.Status = DeviceStatus.NOT_CONNECTED;
                         }
+                        else
+                        {
+                            TriggrViewModel.Model.Status = DeviceStatus.IDLE;
+                        }
                     }, null, 10000, Timeout.Infinite); //10-second timeout. If no response from server, no heartbeat detected
                 }
             }, null, 0, 300000); //5-minute heartbeat checks
