@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows;
 
 namespace triggr
@@ -29,8 +31,9 @@ namespace triggr
                                   select process).FirstOrDefault();
             if (runningProcess != null)
             {
-                ShowWindow(runningProcess.MainWindowHandle, SW_SHOWMAXIMIZED);
-                return; 
+                ShowWindow(runningProcess.MainWindowHandle, 5);
+                this.Shutdown();
+                return;
             }            
 
             base.OnStartup(e);
@@ -40,13 +43,6 @@ namespace triggr
 
             //Open window
             var win = new MainWindow();
-            win.Closed += win_Closed;
-        }
-
-        void win_Closed(object sender, EventArgs e)
-        {
-            mutex.ReleaseMutex();
-            this.Shutdown();
         }
     }
 }

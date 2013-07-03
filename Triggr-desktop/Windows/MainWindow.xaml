@@ -17,7 +17,7 @@
         <l:StatusToStringConverter x:Key="statusToStringConverter" />
     </Window.Resources>
     <Border
-        BorderThickness="2, 0, 2, 2"
+        BorderThickness="1, 1, 1, 1"
         BorderBrush="Black">
         <Border.Effect>
             <DropShadowEffect
