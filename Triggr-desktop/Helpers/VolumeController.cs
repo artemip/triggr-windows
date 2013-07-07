@@ -46,8 +46,8 @@ namespace triggr
                 while (vol == -1)
                 {
                     try
-                    {
-                        vol = _device.AudioEndpointVolume.MasterVolumeLevelScalar;
+                    {   
+                        vol = (_device.AudioEndpointVolume.Mute) ? 0 : _device.AudioEndpointVolume.MasterVolumeLevelScalar;
                     }
                     catch (InvalidCastException ex)
                     {
