@@ -29,9 +29,17 @@ namespace triggr
 
         public static TriggrViewModel Model = new TriggrViewModel();
 
+        private void VolumeChangeHandler(CoreAudioApi.AudioVolumeNotificationData data)
+        {
+            VolumePercentage = (int)(data.MasterVolume * 100);
+        }
+
         private TriggrViewModel() {            
             _serverConnected = TriggrSocketServer.Start();
             HeartbeatListener.Start();
+
+            //Subscribe to volume changes
+            VolumeController.Controller.SubscribeToVolumeChanges(VolumeChangeHandler);
         }
 
         public void Dispose()

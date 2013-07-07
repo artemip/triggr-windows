@@ -27,7 +27,7 @@ namespace triggr
                                     process.Id != currentProcess.Id &&
                                     process.ProcessName.Equals(
                                       currentProcess.ProcessName,
-                                      StringComparison.Ordinal)
+                                      StringComparison.Ordinal) 
                                   select process).FirstOrDefault();
             if (runningProcess != null)
             {

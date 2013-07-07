@@ -25,18 +25,7 @@ namespace triggr
         private VolumeController()
         {
             _deviceEnum = new MMDeviceEnumerator();
-            _device = _deviceEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
-
-            //Hacks to update volume dynamically
-            _volumeMonitor = new Thread(delegate()
-                {
-                    while (true)
-                    {
-                        Thread.Sleep(60);
-                        TriggrViewModel.Model.VolumePercentage = (int)(Controller.Volume * 100);
-                    }
-                });
-            _volumeMonitor.Start();
+            _device = _deviceEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);           
         }
 
         public void Dispose() 
@@ -83,6 +72,13 @@ namespace triggr
                         _device.AudioEndpointVolume.MasterVolumeLevelScalar += stepAmount;
                 }
             }
+        }
+
+        public delegate void VolumeNotificationHandler(AudioVolumeNotificationData data);
+
+        public void SubscribeToVolumeChanges(VolumeNotificationHandler handler)
+        {
+            _device.AudioEndpointVolume.OnVolumeNotification += new AudioEndpointVolumeNotificationDelegate(handler);
         }
     }
 }
