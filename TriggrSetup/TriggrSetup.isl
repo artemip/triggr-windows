@@ -2770,7 +2770,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Fether Technologies</td><td>0</td><td/><td>-1558069613</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Fether Technologies</td><td>0</td><td/><td>1545684085</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-568325554</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-568325554</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>1033</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-568317330</td></row>
@@ -3872,8 +3872,8 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-568325554</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-568325554</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>-568321458</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>http://www.FetherTechnologies.com</td><td>0</td><td/><td>-1558069613</td></row>
-		<row><td>ID_STRING3</td><td>1033</td><td>Fether Technologies</td><td>0</td><td/><td>-1558069613</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>http://www.FetherTechnologies.com</td><td>0</td><td/><td>1545684085</td></row>
+		<row><td>ID_STRING3</td><td>1033</td><td>Fether Technologies</td><td>0</td><td/><td>1545684085</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>Triggr</td><td>0</td><td/><td>1629554454</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td>http://www.triggrapp.com</td><td>0</td><td/><td>438380544</td></row>
 		<row><td>ID_STRING6</td><td>1033</td><td>Triggr</td><td>0</td><td/><td>706815761</td></row>
@@ -4503,7 +4503,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]Triggr-desktop.Primary output</td><td/></row>
 		<row><td>ProductCode</td><td>{FC40BB1F-7EEC-4E8A-B34E-ED91670D0739}</td><td/></row>
 		<row><td>ProductName</td><td>Triggr</td><td/></row>
-		<row><td>ProductVersion</td><td>1.0.1</td><td/></row>
+		<row><td>ProductVersion</td><td>1.0.2</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4519,7 +4519,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR;DOTNETVERSION40CLIENT;ISACTIONPROP2</td><td/></row>
 		<row><td>SelectedSetupType</td><td>##IDS__DisplayName_Typical##</td><td/></row>
 		<row><td>SetupType</td><td>Typical</td><td/></row>
-		<row><td>UpgradeCode</td><td>{66913843-91D9-4547-AA2C-A811CD29569D}</td><td/></row>
+		<row><td>UpgradeCode</td><td>{4B654F54-34FD-40D0-8345-D656854C4D71}</td><td/></row>
 		<row><td>_IsMaintenance</td><td>Change</td><td/></row>
 		<row><td>_IsSetupTypeMin</td><td>Typical</td><td/></row>
 	</table>

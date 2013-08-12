@@ -58,16 +58,19 @@
     <ApplicationIcon>triggr_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>9507CE895179232450729AF5C523DB3B47CDCDB7</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>5711E1972EC802CE3F64426E320E60CBB014BE80</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>cBridge-desktop_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Triggr-desktop_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreAudioApi">
@@ -168,6 +171,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Triggr-desktop_TemporaryKey.pfx" />
     <Resource Include="Resources\Fonts\Windsong.ttf" />
     <Resource Include="Resources\Fonts\OpenSans-Italic.ttf" />
   </ItemGroup>

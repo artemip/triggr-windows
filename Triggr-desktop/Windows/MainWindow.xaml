@@ -9,6 +9,7 @@
         WindowStartupLocation="CenterScreen" 
         Icon="/triggr;component/Resources/Images/triggr_icon.ico" 
         WindowStyle="None"
+        StateChanged="Window_StateChanged"
         ResizeMode="NoResize">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />

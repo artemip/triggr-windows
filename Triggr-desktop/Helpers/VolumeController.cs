@@ -65,11 +65,29 @@ namespace triggr
 
                 for (int i = 0; i < numSteps; ++i)
                 {
-                    Thread.Sleep(5);
-                    if (lowerVolume)
-                        _device.AudioEndpointVolume.MasterVolumeLevelScalar -= stepAmount;
-                    else
-                        _device.AudioEndpointVolume.MasterVolumeLevelScalar += stepAmount;
+                    //TODO: get rid of this try/catch hack
+                    try
+                    {
+                        Thread.Sleep(7);
+                        if (lowerVolume)
+                        {
+                            if (_device.AudioEndpointVolume.MasterVolumeLevelScalar - stepAmount >= 0)
+                            {
+                                _device.AudioEndpointVolume.MasterVolumeLevelScalar -= stepAmount;
+                            }
+                        }
+                        else
+                        {
+                            if (_device.AudioEndpointVolume.MasterVolumeLevelScalar + stepAmount <= 100)
+                            {
+                                _device.AudioEndpointVolume.MasterVolumeLevelScalar += stepAmount;
+                            }
+                        }
+                    }
+                    catch (ArgumentException ex)
+                    {
+
+                    }
                 }
             }
         }
