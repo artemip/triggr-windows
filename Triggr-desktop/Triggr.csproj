@@ -8,8 +8,8 @@
     <ProjectGuid>{5290F1D3-E38B-4C85-AAF9-8B3A95E6FF53}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>triggr</RootNamespace>
-    <AssemblyName>triggr</AssemblyName>
+    <RootNamespace>Triggr</RootNamespace>
+    <AssemblyName>Triggr</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -42,6 +42,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>BasicDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,7 +63,8 @@
     <ManifestCertificateThumbprint>5711E1972EC802CE3F64426E320E60CBB014BE80</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Triggr-desktop_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -75,6 +78,9 @@
   <ItemGroup>
     <Reference Include="CoreAudioApi">
       <HintPath>lib\CoreAudioApi.dll</HintPath>
+    </Reference>
+    <Reference Include="NetSparkle.Net40">
+      <HintPath>..\packages\NetSparkle.1.1.0\lib\net40-full\NetSparkle.Net40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -166,12 +172,13 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Triggr-desktop_TemporaryKey.pfx" />
+    <EmbeddedResource Include="Resources\NetSparkle_DSA.pub" />
     <Resource Include="Resources\Fonts\Windsong.ttf" />
     <Resource Include="Resources\Fonts\OpenSans-Italic.ttf" />
   </ItemGroup>

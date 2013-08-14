@@ -13,7 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace triggr
+namespace Triggr
 {
     /// <summary>
     /// Interaction logic for CircularProgressBar.xaml

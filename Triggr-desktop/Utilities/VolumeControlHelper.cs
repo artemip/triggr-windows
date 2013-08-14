@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace triggr
+namespace Triggr
 {
     #pragma warning disable
     internal class VolumeControlHelper

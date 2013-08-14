@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Threading;
 
 
-namespace triggr
+namespace Triggr
 {
 
     /// <summary>
@@ -51,8 +51,7 @@ namespace triggr
                     //Only if this is the first call
                     if (callCounter == 1)
                     {
-                        VolumeController.Controller.OldVolume = VolumeController.Controller.Volume;
-                        VolumeController.Controller.Volume = 0.05F;
+                        VolumeController.Controller.LowerVolume();
                     }
                 }
                 else if (Regex.IsMatch(evt, outgoingCallEvent)) //Outgoing call
@@ -72,8 +71,7 @@ namespace triggr
                     //Only if this is the first call
                     if (callCounter == 1)
                     {
-                        VolumeController.Controller.OldVolume = VolumeController.Controller.Volume;
-                        VolumeController.Controller.Volume = 0.05F;
+                        VolumeController.Controller.LowerVolume();
                     }
                 }
                 else if (Regex.IsMatch(evt, endCallEvent)) //End call
@@ -86,8 +84,7 @@ namespace triggr
                     if (callCounter == 0)
                     {
                         TriggrViewModel.Model.Status = DeviceStatus.CALL_ENDED;
-
-                        VolumeController.Controller.Volume = VolumeController.Controller.OldVolume;
+                        VolumeController.Controller.RestoreVolume();
                         System.Threading.Thread.Sleep(2000);
                         TriggrViewModel.Model.Status = DeviceStatus.IDLE;
                     }

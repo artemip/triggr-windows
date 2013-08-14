@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Net.Sockets;
 
-namespace triggr
+namespace Triggr
 {
     public class SocketServerNotStartedException : Exception
     {

@@ -17,8 +17,9 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.IO;
 using System.Net;
+using NetSparkle;
 
-namespace triggr
+namespace Triggr
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -26,34 +27,52 @@ namespace triggr
     public partial class MainWindow : Window
     {
         public static NotifyIcon icon;
+        private Sparkle _sparkle;
         private bool _closing = false;
 
         public MainWindow()
         {
+            // Handle global exceptions
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(OnUnhandledException);
+
             InitializeComponent();
+
+            // Set Data Context (for data bindings, as per MVVM)
             DataContext = TriggrViewModel.Model;
 
-            MainWindow.icon = new NotifyIcon();
+            // Extract icon
+            var iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/Resources/Images/favicon.ico")).Stream;
+            var iconImage = new System.Drawing.Icon(iconStream);
 
+            // Set tray icon
+            MainWindow.icon = new NotifyIcon();
+            icon.Icon = iconImage;
+
+            // Set tray icon menu items
             System.Windows.Forms.MenuItem[] menuItems = {
                 new System.Windows.Forms.MenuItem("Show", showWindow_Handler),
                 new System.Windows.Forms.MenuItem("Exit", exit_Handler)
             };
-
             var ctxMenu = new System.Windows.Forms.ContextMenu(menuItems);
-
             icon.Click += new EventHandler(showWindow_Handler);
             icon.ContextMenu = ctxMenu;
-            var iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/Resources/Images/favicon.ico")).Stream;
-            icon.Icon = new System.Drawing.Icon(iconStream);
+
+            // Enable tray icon
             icon.Visible = true;
 
+            // Enable auto-updater
+            _sparkle = new Sparkle("http://www.triggrapp.com/download/update/versioninfo.xml", iconImage);
+            //_sparkle.EnableSilentMode = true;
+            _sparkle.StartLoop(true);
+
+            // If application is new, open it
             if (Properties.Settings.Default.LastLaunch == null || DateTime.Now - Properties.Settings.Default.LastLaunch > TimeSpan.FromDays(30))
             {
-                Properties.Settings.Default.Reset();
-                Properties.Settings.Default.Save();
                 this.Show();
+            }
+            else // Otherwise, show a balloon tooltip
+            {
+                icon.ShowBalloonTip(5000, "Triggr", "Triggr is running in the background. Click here to open the interface", ToolTipIcon.Info);
             }
 
             Properties.Settings.Default.LastLaunch = DateTime.Now;

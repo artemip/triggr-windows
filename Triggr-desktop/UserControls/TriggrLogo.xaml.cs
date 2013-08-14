@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace triggr
+namespace Triggr
 {
     /// <summary>
     /// Interaction logic for TriggrLogo.xaml

@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
-namespace triggr
+namespace Triggr
 {
     /// <summary>
     /// Interaction logic for App.xaml

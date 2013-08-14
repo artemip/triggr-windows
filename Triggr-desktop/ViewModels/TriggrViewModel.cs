@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
-namespace triggr
+namespace Triggr
 {
     public enum DeviceStatus { INCOMING_CALL, OUTGOING_CALL, CALL_ENDED, IDLE, NOT_CONNECTED }
 
@@ -48,7 +48,6 @@ namespace triggr
             {
                 TriggrSocketServer.Stop();
             }
-            VolumeController.Controller.Dispose();
             HeartbeatListener.Stop();
         }
 

@@ -5,17 +5,18 @@ using System.Text;
 using System.Threading;
 using CoreAudioApi;
 
-namespace triggr
+namespace Triggr
 {    
     /// <summary>
     /// Interfaces with the VolumeControllerHelper to perform volume-related tasks
     /// </summary>
-    class VolumeController : IDisposable
+    public class VolumeController
     {
+        public static float LOW_VOLUME = 0.05F;
+
         private float _oldVolume;
         private MMDeviceEnumerator _deviceEnum;
         private MMDevice _device;
-        private Thread _volumeMonitor;
 
         public static readonly VolumeController Controller = new VolumeController();
 
@@ -28,15 +29,37 @@ namespace triggr
             _device = _deviceEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);           
         }
 
-        public void Dispose() 
-        {
-            _volumeMonitor.Abort();
-        }
-
         public float OldVolume
         {
             get { return _oldVolume; }
             set { _oldVolume = (value > 100F) ? 100F : value; }
+        }
+
+        public void LowerVolume()
+        {
+            LowerVolume(LOW_VOLUME);
+        }
+
+        public void LowerVolume(float lowVolume)
+        {
+            if(Volume > lowVolume) {
+                OldVolume = Volume;
+                Volume = lowVolume;
+            }
+        }
+
+        public void RestoreVolume() {
+            Volume = OldVolume;
+        }
+
+        public void Mute()
+        {
+            _device.AudioEndpointVolume.Mute = true;
+        }
+
+        public void UnMute()
+        {
+            _device.AudioEndpointVolume.Mute = false;
         }
 
         public float Volume
@@ -45,50 +68,35 @@ namespace triggr
                 float vol = -1;
                 while (vol == -1)
                 {
-                    try
-                    {   
-                        vol = (_device.AudioEndpointVolume.Mute) ? 0 : _device.AudioEndpointVolume.MasterVolumeLevelScalar;
-                    }
-                    catch (InvalidCastException ex)
-                    {
-                    
-                    }
+                    vol = (_device.AudioEndpointVolume.Mute) ? 0 : _device.AudioEndpointVolume.MasterVolumeLevelScalar;
                 }
                 return vol;
             }
             set {
+                if (value > 1F || value < 0F)
+                    throw new ArgumentOutOfRangeException("Volume cannot be over 1 or below 0.");
+
                 int numSteps = 100;
                 float initVolume = Volume;
                 float stepAmount = Math.Abs(initVolume - value) / numSteps;
 
                 bool lowerVolume = initVolume > value;
 
-                for (int i = 0; i < numSteps; ++i)
+                // Iterate for 'numSteps - 1' to avoid over/underflowing (Volume > 1F or <0F)
+                for (int i = 0; i < numSteps - 1; ++i)
                 {
-                    //TODO: get rid of this try/catch hack
-                    try
+                    Thread.Sleep(15);
+                    if (lowerVolume)
                     {
-                        Thread.Sleep(7);
-                        if (lowerVolume)
-                        {
-                            if (_device.AudioEndpointVolume.MasterVolumeLevelScalar - stepAmount >= 0)
-                            {
-                                _device.AudioEndpointVolume.MasterVolumeLevelScalar -= stepAmount;
-                            }
-                        }
-                        else
-                        {
-                            if (_device.AudioEndpointVolume.MasterVolumeLevelScalar + stepAmount <= 100)
-                            {
-                                _device.AudioEndpointVolume.MasterVolumeLevelScalar += stepAmount;
-                            }
-                        }
+                        _device.AudioEndpointVolume.MasterVolumeLevelScalar -= stepAmount;
                     }
-                    catch (ArgumentException ex)
+                    else
                     {
-
+                        _device.AudioEndpointVolume.MasterVolumeLevelScalar += stepAmount;
                     }
                 }
+
+                _device.AudioEndpointVolume.MasterVolumeLevelScalar = value;
             }
         }
 

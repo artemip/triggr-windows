@@ -7,7 +7,7 @@ using System.IO;
 using System.Net;
 using System.Threading;
 
-namespace triggr
+namespace Triggr
 {
     class TriggrHttpServer {
 

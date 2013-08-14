@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace triggr
+namespace Triggr
 {
+    // TODO: Test this; Make sure it works.
     static class HeartbeatListener
     {
         private static Timer _checkTimer = null;
