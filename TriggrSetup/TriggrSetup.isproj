@@ -28,8 +28,8 @@
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2012SpringLimited\InstallShield.targets"/>
 	<ItemGroup>
-		<ProjectReference Include="..\Triggr-desktop\Triggr-desktop.csproj">
-			<Name>Triggr-desktop1</Name>
+		<ProjectReference Include="..\Triggr-desktop\Triggr.csproj">
+			<Name>Triggr</Name>
 			<Project>{5290F1D3-E38B-4C85-AAF9-8B3A95E6FF53}</Project>
 		</ProjectReference>
 	</ItemGroup>

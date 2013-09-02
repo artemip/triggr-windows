@@ -62,7 +62,7 @@
 		<lastprinted/>
 		<createdtm>06/21/1999 08:00</createdtm>
 		<lastsavedtm>07/14/2000 11:50</lastsavedtm>
-		<pagecount>500</pagecount>
+		<pagecount>200</pagecount>
 		<wordcount>0</wordcount>
 		<charcount/>
 		<appname>InstallShield Express</appname>
@@ -342,7 +342,9 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>Triggr_desktop.Primary_output1</td><td>{75D4C48F-B513-4ED9-9204-96A0191C92DA}</td><td>INSTALLDIR</td><td>2</td><td/><td>triggr_desktop.primary_outpu1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISO19770_LocalTag</td><td>{30E3AC8D-33E2-4EEC-9A52-03137854D82C}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISO19770_SystemTag</td><td>{05A9D654-5029-4E98-9DD6-75ADA52E190C}</td><td>CommonAppDataFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Triggr.Primary_output</td><td>{D3D348CB-F662-41C9-9947-32E1516DBF39}</td><td>INSTALLDIR</td><td>2</td><td/><td>triggr.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1052,6 +1054,8 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>CommonAppDataFolder</td><td>ISO19770_SystemTag</td></row>
+		<row><td>INSTALLDIR</td><td>ISO19770_LocalTag</td></row>
 	</table>
 
 	<table name="CustomAction">
@@ -1140,7 +1144,7 @@
 		<row><td>CommonFilesFolder</td><td>TARGETDIR</td><td>.:Common</td><td/><td>0</td><td/></row>
 		<row><td>DATABASEDIR</td><td>ISYourDataBaseDir</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>DesktopFolder</td><td>TARGETDIR</td><td>.:Desktop</td><td/><td>3</td><td/></row>
-		<row><td>FETHER</td><td>ProgramFilesFolder</td><td>Fether</td><td/><td>0</td><td/></row>
+		<row><td>FETHER_TECHNOLOGIES</td><td>ProgramFilesFolder</td><td>FETHER~1|Fether Technologies</td><td/><td>0</td><td/></row>
 		<row><td>FavoritesFolder</td><td>TARGETDIR</td><td>.:FAVORI~1|Favorites</td><td/><td>0</td><td/></row>
 		<row><td>FontsFolder</td><td>TARGETDIR</td><td>.:Fonts</td><td/><td>0</td><td/></row>
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
@@ -1167,7 +1171,7 @@
 		<row><td>TARGETDIR</td><td/><td>SourceDir</td><td/><td>0</td><td/></row>
 		<row><td>TRIGGR</td><td>TRIGGR1</td><td>Triggr</td><td/><td>0</td><td/></row>
 		<row><td>TRIGGR1</td><td>ProgramFilesFolder</td><td>Triggr</td><td/><td>0</td><td/></row>
-		<row><td>TRIGGR2</td><td>FETHER</td><td>Triggr</td><td/><td>0</td><td/></row>
+		<row><td>TRIGGR2</td><td>FETHER_TECHNOLOGIES</td><td>Triggr</td><td/><td>0</td><td/></row>
 		<row><td>TempFolder</td><td>TARGETDIR</td><td>.:Temp</td><td/><td>0</td><td/></row>
 		<row><td>TemplateFolder</td><td>TARGETDIR</td><td>.:ShellNew</td><td/><td>0</td><td/></row>
 		<row><td>USERPROFILE</td><td>TARGETDIR</td><td>.:USERPR~1|UserProfile</td><td/><td>0</td><td/></row>
@@ -1866,7 +1870,9 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
-		<row><td>AlwaysInstall</td><td>Triggr_desktop.Primary_output1</td></row>
+		<row><td>AlwaysInstall</td><td>ISO19770_LocalTag</td></row>
+		<row><td>AlwaysInstall</td><td>ISO19770_SystemTag</td></row>
+		<row><td>AlwaysInstall</td><td>Triggr.Primary_output</td></row>
 	</table>
 
 	<table name="File">
@@ -1881,7 +1887,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>triggr_desktop.primary_outpu1</td><td>Triggr_desktop.Primary_output1</td><td>Triggr-desktop.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;Triggr-desktop1&gt;|Built</td><td>3</td><td/></row>
+		<row><td>triggr.primary_output</td><td>Triggr.Primary_output</td><td>Triggr.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;Triggr&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2139,7 +2145,9 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>Triggr_desktop.Primary_output1</td><td/><td/><td>_5868A4EC_E176_4A06_B931_D3612CE9C22B_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISO19770_LocalTag</td><td/><td/><td>_F7F0A38E_3B06_419C_9E9C_0A2FBD4B926A_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISO19770_SystemTag</td><td/><td/><td>_F91FEE0A_9722_4BFA_B855_D5B322B17651_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Triggr.Primary_output</td><td/><td/><td>_0F677D4D_89F8_43A6_8FF4_911A2DE3B3A5_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2458,6 +2466,7 @@
 		<row><td>ISProjectFolder</td><td/><td/><td>1</td></row>
 		<row><td>ProgramFilesFolder</td><td/><td/><td>1</td></row>
 		<row><td>SystemFolder</td><td/><td/><td>1</td></row>
+		<row><td>Triggr</td><td>Triggr-desktop\Triggr.csproj</td><td/><td>2</td></row>
 		<row><td>Triggr-desktop</td><td>cBridge-desktop\Triggr-desktop.csproj</td><td/><td>2</td></row>
 		<row><td>Triggr-desktop1</td><td>Triggr-desktop\Triggr-desktop.csproj</td><td/><td>2</td></row>
 		<row><td>WindowsFolder</td><td/><td/><td>1</td></row>
@@ -3872,7 +3881,7 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-568325554</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-568325554</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>-568321458</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>http://www.FetherTechnologies.com</td><td>0</td><td/><td>1545684085</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>http://www.fether.co</td><td>0</td><td/><td>211913330</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Fether Technologies</td><td>0</td><td/><td>1545684085</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>Triggr</td><td>0</td><td/><td>1629554454</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td>http://www.triggrapp.com</td><td>0</td><td/><td>438380544</td></row>
@@ -3883,7 +3892,8 @@
 	<table name="ISSwidtagProperty">
 		<col key="yes" def="s72">Name</col>
 		<col def="s0">Value</col>
-		<row><td>UniqueId</td><td>5E8C6739-43D9-4047-8DB9-0D65325426DB</td></row>
+		<row><td>TagCreatorRegid</td><td>regid.2013-09.co.fether</td></row>
+		<row><td>UniqueId</td><td>D0EC6987-DFF8-46A0-9FAD-5F2AB576D15B</td></row>
 	</table>
 
 	<table name="ISTargetImage">
@@ -4133,6 +4143,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>SccEnabled</td><td>0</td></row>
 		<row><td>SccPath</td><td/></row>
 		<row><td>SchemaVersion</td><td>773</td></row>
+		<row><td>SwidtagLocalComponent</td><td>ISO19770_LocalTag</td></row>
+		<row><td>SwidtagSystemComponent</td><td>ISO19770_SystemTag</td></row>
 		<row><td>Type</td><td>MSIE</td></row>
 	</table>
 
@@ -4503,7 +4515,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]Triggr-desktop.Primary output</td><td/></row>
 		<row><td>ProductCode</td><td>{FC40BB1F-7EEC-4E8A-B34E-ED91670D0739}</td><td/></row>
 		<row><td>ProductName</td><td>Triggr</td><td/></row>
-		<row><td>ProductVersion</td><td>1.0.2</td><td/></row>
+		<row><td>ProductVersion</td><td>1.2.0</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4519,7 +4531,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR;DOTNETVERSION40CLIENT;ISACTIONPROP2</td><td/></row>
 		<row><td>SelectedSetupType</td><td>##IDS__DisplayName_Typical##</td><td/></row>
 		<row><td>SetupType</td><td>Typical</td><td/></row>
-		<row><td>UpgradeCode</td><td>{4B654F54-34FD-40D0-8345-D656854C4D71}</td><td/></row>
+		<row><td>UpgradeCode</td><td>{0A614122-0F16-4CD0-80B1-FC5356BA3A4A}</td><td/></row>
 		<row><td>_IsMaintenance</td><td>Change</td><td/></row>
 		<row><td>_IsSetupTypeMin</td><td>Typical</td><td/></row>
 	</table>
@@ -4580,9 +4592,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>FileKey1</td><td>Triggr_desktop.Primary_output1</td><td/><td>fether</td><td>2</td></row>
-		<row><td>FileKey2</td><td>Triggr_desktop.Primary_output1</td><td/><td>triggr</td><td>2</td></row>
-		<row><td>_Built</td><td>Triggr_desktop.Primary_output1</td><td/><td>triggr</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4668,8 +4677,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>_Built</td><td>triggr</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>Triggr_desktop.Primary_output1</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built_1CD750CD97CA4410B397189925A5BC3F.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>Triggr_desktop.Primary_output1</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built1_2BAA0AC5AE614213854B0517FA137845.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
