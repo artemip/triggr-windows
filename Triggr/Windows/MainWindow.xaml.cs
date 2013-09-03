@@ -17,7 +17,6 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.IO;
 using System.Net;
-using NetSparkle;
 
 namespace Triggr
 {
@@ -27,7 +26,6 @@ namespace Triggr
     public partial class MainWindow : Window
     {
         public static NotifyIcon icon;
-        private Sparkle _sparkle;
         private bool _closing = false;
 
         public MainWindow()
@@ -60,11 +58,6 @@ namespace Triggr
 
             // Enable tray icon
             icon.Visible = true;
-
-            // Enable auto-updater
-            _sparkle = new Sparkle("http://www.triggrapp.com/download/update/versioninfo2.xml", iconImage);
-            //_sparkle.EnableSilentMode = true;
-            _sparkle.StartLoop(true);
 
             // If application is new, open it
             if (Properties.Settings.Default.IsFirstLaunch || DateTime.Now - Properties.Settings.Default.LastLaunch > TimeSpan.FromDays(15))

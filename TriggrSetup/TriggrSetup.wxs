@@ -121,17 +121,14 @@
             
             <!-- DLL's (CoreAudioAPI, NetSparkle for auto-updates) -->
             <Component Id="CoreAudioApiLibrary">
-              <File Id="CoreAudioDLL" Name="CoreAudioApi.dll" DiskId="1" Source="$(var.Triggr.ProjectDir)\lib\CoreAudioApi.dll" KeyPath="yes" />
-            </Component>
-            <Component Id="NetSparkleLibrary">
-              <File Id="NetSparkleDLL" Name="NetSparkle.Net40.dll" DiskId="1" Source="$(var.SolutionDir)\packages\NetSparkle.1.1.0\lib\net40-full\NetSparkle.Net40.dll" KeyPath="yes" />
+              <File Id="CoreAudioDLL" Name="CoreAudioApi.dll" DiskId="1" Source="$(var.Triggr.ProjectDir)lib\CoreAudioApi.dll" KeyPath="yes" />
             </Component>
           </Directory>
         </Directory>
         <Component Id="RegistryEntries">
             <!-- Autorun key to be added to the registry -->
             <RegistryKey Id='TriggrRegExe' Root='HKCU' Key='SOFTWARE\Microsoft\Windows\CurrentVersion\Run' ForceCreateOnInstall='yes'>
-              <RegistryValue Type='string' Name='Triggr' Value='[INSTALLDIR]\$(var.Triggr.TargetFileName)' KeyPath='yes'/>
+              <RegistryValue Type='string' Name='Triggr' Value='[INSTALLDIR]$(var.Triggr.TargetFileName)' KeyPath='yes'/>
             </RegistryKey>
           </Component>
       </Directory>
@@ -154,7 +151,6 @@
 		<Feature Id="Complete" Title="Triggr" Level="1" Display="expand" ConfigurableDirectory="INSTALLDIR">
       <ComponentRef Id="TriggrExecutable" />
       <ComponentRef Id="CoreAudioApiLibrary" />
-      <ComponentRef Id="NetSparkleLibrary" />
       <ComponentRef Id="ProgramMenuDir" />
       <ComponentRef Id="RegistryEntries" />
     </Feature>
@@ -163,7 +159,7 @@
     <CustomAction Id='LaunchApp' FileKey='TriggrEXE' ExeCommand='' Return='asyncNoWait' />
     
     <!-- Embed the Triggr logo in the executable -->
-    <Icon Id="triggr_icon.ico" SourceFile="$(var.Triggr.ProjectDir)\Resources\Images\triggr_icon.ico"/>
+    <Icon Id="triggr_icon.ico" SourceFile="$(var.Triggr.ProjectDir)Resources\Images\triggr_icon.ico"/>
     <Property Id="ARPPRODUCTICON" Value="triggr_icon.ico" />
   </Product>
 </Wix>    

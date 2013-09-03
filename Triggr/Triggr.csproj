@@ -60,7 +60,7 @@
     <ApplicationIcon>triggr_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>5711E1972EC802CE3F64426E320E60CBB014BE80</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3B272346C7AEC07CE13E65B3BD18A2B9E690CC90</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
@@ -79,9 +79,6 @@
     <Reference Include="CoreAudioApi, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\CoreAudioApi.dll</HintPath>
-    </Reference>
-    <Reference Include="NetSparkle.Net40">
-      <HintPath>..\packages\NetSparkle.1.1.0\lib\net40-full\NetSparkle.Net40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -179,7 +176,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <EmbeddedResource Include="Resources\NetSparkle_DSA.pub" />
     <Resource Include="Resources\Fonts\Windsong.ttf" />
     <Resource Include="Resources\Fonts\OpenSans-Italic.ttf" />
   </ItemGroup>
