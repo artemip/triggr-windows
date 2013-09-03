@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">   
+	<channel>      
+		<title>Triggr AppCast</title>      
+		<link>http://www.triggrapp.com/download/update/versioninfo2.xml</link>
+		<description></description>
+		<language>en</language>               
+		<item>            
+			<title>Version 1.1.0.0</title>
+			<!-- <sparkle:releaseNotesLink>http://update.applimit.com/netsparkle/1.0.1/rnotes.html</sparkle:releaseNotesLink> -->
+			<pubDate>Sun, 2 Sep 2013 11:37:11 +0000</pubDate>
+			<enclosure 
+				url="http://www.triggrapp.com/download/current/TriggrSetup.msi"
+				length="524288" 
+				type="application/octet-stream"
+				sparkle:version="1.1.0.0" 
+				sparkle:dsaSignature="gCvH9rEIJRv6s2zRGttwZvkPxZUDBcvEg8nqZX89Kc9buYNtx/lUkQ=="
+			/>
+		</item>
+	</channel>
+</rss>

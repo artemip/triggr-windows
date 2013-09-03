@@ -55,24 +55,25 @@ namespace Triggr
             };
             var ctxMenu = new System.Windows.Forms.ContextMenu(menuItems);
             icon.Click += new EventHandler(showWindow_Handler);
+            icon.BalloonTipClicked += new EventHandler(showWindow_Handler);
             icon.ContextMenu = ctxMenu;
 
             // Enable tray icon
             icon.Visible = true;
 
             // Enable auto-updater
-            _sparkle = new Sparkle("http://www.triggrapp.com/download/update/versioninfo.xml", iconImage);
+            _sparkle = new Sparkle("http://www.triggrapp.com/download/update/versioninfo2.xml", iconImage);
             //_sparkle.EnableSilentMode = true;
             _sparkle.StartLoop(true);
 
             // If application is new, open it
-            if (Properties.Settings.Default.LastLaunch == null || DateTime.Now - Properties.Settings.Default.LastLaunch > TimeSpan.FromDays(30))
+            if (Properties.Settings.Default.IsFirstLaunch || DateTime.Now - Properties.Settings.Default.LastLaunch > TimeSpan.FromDays(15))
             {
                 this.Show();
             }
             else // Otherwise, show a balloon tooltip
             {
-                icon.ShowBalloonTip(5000, "Triggr", "Triggr is running in the background. Click here to open the interface", ToolTipIcon.Info);
+                icon.ShowBalloonTip(5000, "", "Triggr is running in the background", ToolTipIcon.Info);
             }
 
             Properties.Settings.Default.LastLaunch = DateTime.Now;
@@ -96,6 +97,11 @@ namespace Triggr
             {
                 e.Cancel = true;
                 this.Hide();
+                if (Properties.Settings.Default.IsFirstLaunch)
+                {
+                    icon.ShowBalloonTip(5000, "", "Triggr is running in the background", ToolTipIcon.Info);
+                    Properties.Settings.Default.IsFirstLaunch = false;
+                }
             }
             else
             {

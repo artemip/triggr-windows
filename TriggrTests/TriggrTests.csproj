@@ -35,9 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CoreAudioApi, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Triggr-desktop\lib\CoreAudioApi.dll</HintPath>
+    <Reference Include="CoreAudioApi">
+      <HintPath>..\Triggr\lib\CoreAudioApi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -58,7 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Triggr-desktop\Triggr.csproj">
+    <ProjectReference Include="..\Triggr\Triggr.csproj">
       <Project>{5290f1d3-e38b-4c85-aaf9-8b3a95e6ff53}</Project>
       <Name>Triggr</Name>
     </ProjectReference>

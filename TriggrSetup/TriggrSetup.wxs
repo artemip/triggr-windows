@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <Product
+    Name="Triggr"
+    Id="FC40BB1F-7EEC-4E8A-B34E-ED91670D0739"
+    Language="1033"
+    Version="1.1.0.0"
+    Manufacturer="Fether Technologies"
+    UpgradeCode="DBE3D905-45F9-4CB3-9C78-61BD64595BFB">
+    
+    <!-- Installer Package Description -->
+		<Package 
+      Id='*'
+      Keywords='Installer'
+      Description="Fether Technologies' Triggr Installer"
+      Manufacturer="Fether Technologies"
+      InstallerVersion="200" 
+      Compressed="yes" 
+      InstallScope="perMachine" />
+    
+    <!-- Upgrade Package Description -->
+      <!--
+    <Upgrade Id="<UpgradeCode GUID of original installation package>">
+        <UpgradeVersion OnlyDetect='yes' Property='SELFFOUND'
+            Minimum='1.1.0' IncludeMinimum='yes'
+            Maximum='1.1.0' IncludeMaximum='yes' />
+         <UpgradeVersion OnlyDetect='yes' Property='NEWERFOUND'
+            Minimum='1.0.0' IncludeMinimum='no' />
+    </Upgrade>
+    
+    To avoid wierd messages for minor upgrades, run:
+      msiexec /i Upgrade.msi REINSTALL=ALL REINSTALLMODE=vomus
+    
+    
+      <!- Major Upgrade
+      <Upgrade Id='YOURGUID-7349-453F-94F6-BCB5110BA4FD'>
+        <UpgradeVersion OnlyDetect='no' Property='PREVIOUSFOUND'
+          Minimum='1.0.0' IncludeMinimum='yes' <- Oldest Version
+          Maximum='3.0.0' IncludeMaximum='no' /> <- Current Version
+      </Upgrade>
+      - Product ID needs to be changed as well
+      -->
+    
+    <!-- Make sure we can't downgrade-->
+    <CustomAction Id='NoDowngrade' Error='A later version of [ProductName] is already installed.' />
+
+    <InstallExecuteSequence>
+      <Custom Action='NoDowngrade' After='FindRelatedProducts'>NEWERFOUND</Custom>
+      <Custom Action='LaunchApp' After='InstallFinalize'>NOT Installed</Custom>
+    </InstallExecuteSequence>
+    
+    <!-- <Media Id="1" Cabinet="Triggr.cab" EmbedCab="yes" /> -->
+		<MediaTemplate />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    
+    <!-- What UI to use? -->
+    <UI Id="WixUI_Minimal">
+      <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+      <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
+      <TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
+
+      <Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
+      <Property Id="WixUI_Mode" Value="Minimal" />
+
+      <DialogRef Id="ErrorDlg" />
+      <DialogRef Id="FatalError" />
+      <DialogRef Id="FilesInUse" />
+      <DialogRef Id="MsiRMFilesInUse" />
+      <DialogRef Id="PrepareDlg" />
+      <DialogRef Id="ProgressDlg" />
+      <DialogRef Id="ResumeDlg" />
+      <DialogRef Id="UserExit" />
+
+      <!-- This is the welcome dialog you specified-->
+      <DialogRef Id="WelcomeDlg" />
+
+      <!-- Hook the new welcome dialog to the next one in the stack-->
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="PrepareDlg">1</Publish>
+
+      <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999">1</Publish>
+
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg">1</Publish>
+
+      <Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog" Value="MaintenanceTypeDlg">1</Publish>
+
+      <Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+      <Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+      <Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg">1</Publish>
+
+      <Property Id="ARPNOMODIFY" Value="1" />
+    </UI>
+
+    <UIRef Id="WixUI_Common" />
+
+    <!-- Check for .NET 4.0 Client -->
+    <PropertyRef Id="NETFRAMEWORK40CLIENT"/>
+    <Condition Message='This setup requires the .NET Framework 3.5 client profile installed.'>
+      <![CDATA[Installed OR NETFRAMEWORK40CLIENT]]>
+    </Condition>
+    <!-- TODO: 
+    candle.exe TriggrSetup.wxs
+    light.exe -ext WixNetFxExtension TriggrSetup.wixobj
+      -->
+
+    <!-- Describe contents of application, and destination directories-->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="FetherTechnologies" Name="Fether Technologies">
+          <Directory Id="INSTALLDIR" Name="Triggr">
+            
+            <!-- Triggr Executable Componenr-->
+            <Component Id="TriggrExecutable" Guid="861F4F6A-6DF6-4266-AF37-75BFA989B353">
+              <File Id="TriggrEXE" Name="$(var.Triggr.TargetFileName)" DiskId="1" Source="$(var.Triggr.TargetPath)" KeyPath="yes">
+                
+                <!-- Shortcuts to be created-->
+                <Shortcut Id="startmenuTriggr" Directory="ProgramMenuDir" Name="Triggr"
+                        WorkingDirectory='INSTALLDIR' Icon="triggr_icon.ico" IconIndex="0" Advertise="yes" />
+                <Shortcut Id="desktopTriggr" Directory="DesktopFolder" Name="Triggr"
+                  WorkingDirectory='INSTALLDIR' Icon="triggr_icon.ico" IconIndex="0" Advertise="yes" />
+              </File>
+            </Component>
+            
+            <!-- DLL's (CoreAudioAPI, NetSparkle for auto-updates) -->
+            <Component Id="CoreAudioApiLibrary">
+              <File Id="CoreAudioDLL" Name="CoreAudioApi.dll" DiskId="1" Source="$(var.Triggr.ProjectDir)\lib\CoreAudioApi.dll" KeyPath="yes" />
+            </Component>
+            <Component Id="NetSparkleLibrary">
+              <File Id="NetSparkleDLL" Name="NetSparkle.Net40.dll" DiskId="1" Source="$(var.SolutionDir)\packages\NetSparkle.1.1.0\lib\net40-full\NetSparkle.Net40.dll" KeyPath="yes" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Component Id="RegistryEntries">
+            <!-- Autorun key to be added to the registry -->
+            <RegistryKey Id='TriggrRegExe' Root='HKCU' Key='SOFTWARE\Microsoft\Windows\CurrentVersion\Run' ForceCreateOnInstall='yes'>
+              <RegistryValue Type='string' Name='Triggr' Value='[INSTALLDIR]\$(var.Triggr.TargetFileName)' KeyPath='yes'/>
+            </RegistryKey>
+          </Component>
+      </Directory>
+      
+      <!-- Remove directory on uninstall -->
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="Triggr">
+          <Component Id="ProgramMenuDir" Guid="4DCCE9F9-F08E-427A-B961-CA8531C7F42F">
+            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes'/>
+          </Component>
+        </Directory>
+      </Directory>
+
+      <!-- Reference desktop -->
+      <Directory Id="DesktopFolder" Name="Desktop" />
+    </Directory>
+
+    <!-- Feature-set of complete Triggr product (Executable, DLLs, and Directory in which it's all stored-->
+		<Feature Id="Complete" Title="Triggr" Level="1" Display="expand" ConfigurableDirectory="INSTALLDIR">
+      <ComponentRef Id="TriggrExecutable" />
+      <ComponentRef Id="CoreAudioApiLibrary" />
+      <ComponentRef Id="NetSparkleLibrary" />
+      <ComponentRef Id="ProgramMenuDir" />
+      <ComponentRef Id="RegistryEntries" />
+    </Feature>
+    
+    <!-- Launch the application after installation -->
+    <CustomAction Id='LaunchApp' FileKey='TriggrEXE' ExeCommand='' Return='asyncNoWait' />
+    
+    <!-- Embed the Triggr logo in the executable -->
+    <Icon Id="triggr_icon.ico" SourceFile="$(var.Triggr.ProjectDir)\Resources\Images\triggr_icon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="triggr_icon.ico" />
+  </Product>
+</Wix>    

@@ -49,12 +49,25 @@ namespace Triggr.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1991-09-26")]
         public global::System.DateTime LastLaunch {
             get {
                 return ((global::System.DateTime)(this["LastLaunch"]));
             }
             set {
                 this["LastLaunch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsFirstLaunch {
+            get {
+                return ((bool)(this["IsFirstLaunch"]));
+            }
+            set {
+                this["IsFirstLaunch"] = value;
             }
         }
     }
