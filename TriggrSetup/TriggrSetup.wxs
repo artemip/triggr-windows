@@ -49,8 +49,7 @@
       <Custom Action='LaunchApp' After='InstallFinalize'>NOT Installed</Custom>
     </InstallExecuteSequence>
     
-    <!-- <Media Id="1" Cabinet="Triggr.cab" EmbedCab="yes" /> -->
-		<MediaTemplate />
+    <Media Id="1" Cabinet="cab1.cab" EmbedCab="yes" />
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     
     <!-- What UI to use? -->

@@ -89,7 +89,16 @@ namespace Triggr
 
             if (!socket.Connected) return;
 
-            int bytesRead = socket.EndReceive(ar);
+            int bytesRead = 0;
+
+            try
+            {
+                bytesRead = socket.EndReceive(ar);
+            }
+            catch (SocketException)
+            {
+                bytesRead = 0;
+            }
 
             if (bytesRead > 0)
             {
