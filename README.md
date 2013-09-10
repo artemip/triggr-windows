@@ -1,2 +1,2 @@
-cBridge-desktop
+Triggr for Windows
 ===============
