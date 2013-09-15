@@ -36,9 +36,10 @@ namespace Triggr
             {
                 if (Regex.IsMatch(evt, incomingCallEvent)) //Incoming call
                 {
-                    var data = evt.Split(':')[1];
-                    var callerId = data.Split(',')[0];
-                    var callerName = data.Split(',')[1];
+                    var splitData = evt.Split(new char[] {':'}, 2);
+                    var splitCallData = splitData[1].Split(new char[] { ',' }, 2);
+                    var callerId = splitCallData[0];
+                    var callerName = splitCallData[1];
 
                     callCounter++;
 
@@ -56,9 +57,10 @@ namespace Triggr
                 }
                 else if (Regex.IsMatch(evt, outgoingCallEvent)) //Outgoing call
                 {
-                    var data = evt.Split(':')[1];
-                    var callerId = data.Split(',')[0];
-                    var callerName = data.Split(',')[1];
+                    var splitData = evt.Split(new char[] { ':' }, 2);
+                    var splitCallData = splitData[1].Split(new char[] { ',' }, 2);
+                    var callerId = splitCallData[0];
+                    var callerName = splitCallData[1];
 
                     callCounter++;
 
@@ -119,7 +121,6 @@ namespace Triggr
 
                     TriggrViewModel.Model.CallerName = "Disconnected";
                     TriggrViewModel.Model.CallerId = "";
-
                     startOnUIThread(displayNotification);
                 }
             }

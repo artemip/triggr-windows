@@ -158,6 +158,10 @@
     <!-- Launch the application after installation -->
     <CustomAction Id='LaunchApp' FileKey='TriggrEXE' ExeCommand='' Return='asyncNoWait' />
     
+    <!-- Customize Installer -->
+    <WixVariable Id='WixUIBannerBmp' Value='Images/bannrbmp.bmp'/>
+    <WixVariable Id='WixUIDialogBmp' Value='Images/dlgbmp.bmp'/>
+
     <!-- Embed the Triggr logo in the executable -->
     <Icon Id="triggr_icon.ico" SourceFile="$(var.Triggr.ProjectDir)Resources\Images\triggr_icon.ico"/>
     <Property Id="ARPPRODUCTICON" Value="triggr_icon.ico" />

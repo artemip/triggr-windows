@@ -69,7 +69,7 @@ namespace Triggr
                 if (_socket != null)
                 {
                     _socket.Shutdown(SocketShutdown.Both);
-                   //socket.Close();
+                   _socket.Close();
                 }
 
                 _started = false;

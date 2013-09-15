@@ -51,6 +51,13 @@
       <Name>WixNetFxExtension</Name>
     </WixExtension>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\bannrbmp.bmp" />
+    <Content Include="Images\dlgbmp.bmp" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
