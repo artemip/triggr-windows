@@ -2,12 +2,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PublishUrlHistory>publish\</PublishUrlHistory>
-    <InstallUrlHistory />
-    <SupportUrlHistory />
-    <UpdateUrlHistory />
+    <InstallUrlHistory>http://www.triggrapp.com/download/current/|http://www.triggrapp.com/download/clickonce/</InstallUrlHistory>
+    <SupportUrlHistory>http://www.fether.co</SupportUrlHistory>
+    <UpdateUrlHistory>http://www.triggrapp.com/download/update/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
-    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <VerifyUploadedFiles>true</VerifyUploadedFiles>
   </PropertyGroup>
 </Project>

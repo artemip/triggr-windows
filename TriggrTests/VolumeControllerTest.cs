@@ -2,13 +2,14 @@
 using Triggr;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading;
+using Triggr.Events.Reaction;
 
 namespace TriggrTests
 {
     [TestClass]
-    public class VolumeControllerTests
+    public class VolumeControllerTest
     {
-        VolumeController volControl = Triggr.VolumeController.Controller;
+        VolumeController volControl = new VolumeController();
         float volume;
 
         [TestInitialize]
@@ -74,11 +75,11 @@ namespace TriggrTests
 
             volControl.Volume = 0.6F;
             Thread.Sleep(20);
-            Assert.AreEqual(0.6F, lastData.MasterVolume);
+            Assert.AreEqual(0.6F, lastData.MasterVolume, 0.001F);
 
             volControl.Volume = 0.2F;
             Thread.Sleep(20);
-            Assert.AreEqual(0.2F, lastData.MasterVolume);
+            Assert.AreEqual(0.2F, lastData.MasterVolume, 0.001F);
 
             volControl.Mute();
             Thread.Sleep(20);

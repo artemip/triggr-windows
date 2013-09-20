@@ -12,9 +12,6 @@
         ResizeMode="NoResize">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
-        <l:InvertedBoolToVisibilityConverter x:Key="invertedBoolToVisibilityConverter" />
-        <l:StatusToImagePathConverter x:Key="statusToImagePathConverter" />
-        <l:StatusToStringConverter x:Key="statusToStringConverter" />
     </Window.Resources>
     <Border
         BorderThickness="1, 1, 1, 1"
@@ -106,8 +103,7 @@
                         HorizontalAlignment="Right"
                         FontSize="14"
                         Foreground="White"
-                        Style="{StaticResource CustomButtonStyle}" 
-                        Visibility="{Binding PairingModeEnabled, Converter={StaticResource invertedBoolToVisibilityConverter}}" 
+                        Style="{StaticResource CustomButtonStyle}"
                         Click="InitiatePairing" />
                     </Grid>
                 </Grid>
@@ -146,7 +142,7 @@
                         VerticalAlignment="Center" 
                         FontSize="24"
                         Style="{StaticResource FontStyle}">
-                        <Run Text="{Binding Status, Converter={StaticResource statusToStringConverter}}" />
+                        <!--<Run Text="{Binding Status, Converter={StaticResource statusToStringConverter}}" />-->
                         </TextBlock>
                     </Grid>
                 </Grid>

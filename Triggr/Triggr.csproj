@@ -15,21 +15,30 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
+    <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <AutorunEnabled>true</AutorunEnabled>
+    <InstallUrl>http://www.triggrapp.com/download/current/</InstallUrl>
+    <UpdateUrl>http://www.triggrapp.com/download/update/</UpdateUrl>
+    <SupportUrl>http://www.fether.co</SupportUrl>
+    <TargetCulture>en</TargetCulture>
+    <ProductName>Triggr</ProductName>
+    <PublisherName>Fether Technologies Inc.</PublisherName>
+    <MinimumRequiredVersion>1.1.1.0</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.1.2.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -73,7 +82,13 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Triggr.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>triggr.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreAudioApi, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -82,7 +97,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -101,27 +118,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\StatusToStringConverter.cs" />
+    <Compile Include="Events\EventHandler.cs" />
+    <Compile Include="Events\Event.cs" />
     <Compile Include="UserControls\TriggrLogo.xaml.cs">
       <DependentUpon>TriggrLogo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Base62.cs" />
-    <Compile Include="Networking\TriggrHttpServer.cs" />
-    <Compile Include="Networking\TriggrSocketServer.cs" />
+    <Compile Include="Networking\SocketServer.cs" />
+    <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\TriggrViewModel.cs" />
     <Compile Include="UserControls\CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\SocketEventHandler.cs" />
-    <Compile Include="Helpers\HeartbeatListener.cs" />
+    <Compile Include="Networking\SocketMessageHandler.cs" />
     <Compile Include="Converters\InvertedVisibilityConverter.cs" />
     <Compile Include="Windows\NotificationWindow.xaml.cs">
       <DependentUpon>NotificationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\SocketHelper.cs" />
-    <Compile Include="Converters\StatusToImagePathConverter.cs" />
-    <Compile Include="Helpers\VolumeController.cs" />
-    <Compile Include="Utilities\VolumeControlHelper.cs" />
+    <Compile Include="Networking\SocketUtils.cs" />
+    <Compile Include="Events\Reaction\VolumeController.cs" />
     <Page Include="Resources\Styles\ButtonStylesDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,12 +185,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="triggr.pfx" />
     <Resource Include="Resources\Fonts\Windsong.ttf" />
     <Resource Include="Resources\Fonts\OpenSans-Italic.ttf" />
   </ItemGroup>

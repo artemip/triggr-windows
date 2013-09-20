@@ -12,11 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Triggr.ViewModels;
 
 namespace Triggr
 {
-    public enum NotificationType { INCOMING_CALL, OUTGOING_CALL, CALL_ENDED }
-
     /// <summary>
     /// Interaction logic for Notification.xaml
     /// </summary>
@@ -25,7 +24,7 @@ namespace Triggr
         public NotificationWindow()
         {
             InitializeComponent();
-            DataContext = TriggrViewModel.Model;
+            DataContext = TriggrViewModel.NotificationModel;
 
             double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
             double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
@@ -38,10 +37,6 @@ namespace Triggr
         private double fadeInDuration = 0.4;
         private double fadeOutDuration = 0.2;
 
-        /// <summary>
-        /// Show the notification for a specified duration
-        /// </summary>
-        /// <param name="waitDuration">Duration for which to show the notiftication</param>
         public void ShowFor(TimeSpan waitDuration)
         {
             this.Opacity = 0;

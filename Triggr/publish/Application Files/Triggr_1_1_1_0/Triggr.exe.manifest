@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Triggr.exe" version="1.1.1.0" publicKeyToken="9c4b8967b928ae89" language="en" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="triggr_icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Triggr" version="1.1.0.0" publicKeyToken="05F3F0BACBB35EBC" language="neutral" processorArchitecture="msil" />
+    <commandLine file="Triggr.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CoreAudioApi.dll" size="25088">
+      <assemblyIdentity name="CoreAudioApi" version="2.0.0.0" publicKeyToken="05F3F0BACBB35EBC" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>pRsNN/44biC7OrWv/LE1Mvc1plI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Triggr.exe" size="1611776">
+      <assemblyIdentity name="Triggr" version="1.1.0.0" publicKeyToken="05F3F0BACBB35EBC" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>3eqERTr8GOIG2oLzl5l25SWALGs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Resources\Images\triggr_logo.svg" size="6337">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>db60ac49Iz9dRc1bZCr2HUjg+gA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Triggr.exe.config" size="1769">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>BsFiKKstJ8FkDQcPLsUDKq5Qr9E=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="triggr_icon.ico" size="370070">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>80nzykmcbDAC1AAuTayT+OZO1y0=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=THEFACEBOOK\artemp" issuerKeyHash="786c5fc7826634a35131577e25e32cfc9b41cc10" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>lpsSd+7BcMZKnWD2vfE2ido+FP8=</DigestValue></Reference></SignedInfo><SignatureValue>JUN4j0bEitbTdLRNEm2MGX/Tt8ZdHkZIrWCH5gxHt+IrtFx8du3YiACnpvvkjPOfZoDwmvtWLwtQ7dIu7eNNM94nDw66VtG1dy392RF5QaYhyt91wMAwRpI3bxYUNH+/4ydJ2a91QvIehQe97S9xohvjQnvCwF5pJzSXmvCr3t8=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>l3j/hH8X86AYyaa9BiIV7gGghsAMc9OojDkQnP5zh/dARW0qTTLSHp0cadC8vOyIlZayB+G5tXXa8lKYczDQuSX67uzffi+e6buXBUK0lRx8EyQOgBtoasVX7aD6Iw75fRaE2PlUWfFWM0YmyehA0014Q+sQ++oKO4xazvMoRBc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="ff143eda8936f1bdf6609d4ac670c1ee77129b96" Description="" Url=""><as:assemblyIdentity name="Triggr.exe" version="1.1.1.0" publicKeyToken="9c4b8967b928ae89" language="en" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=THEFACEBOOK\artemp</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>VANL2BevQDN/ZjLKfhQGw2QtZS4=</DigestValue></Reference></SignedInfo><SignatureValue>gWmsvcaolIbQiFln2uvRd9/G9dTk+ttZDIFh0IRInWAy9dozZ7pMb77gPzGYFxjHjTygr+hCEEjHbKEJHEONINQ8M2V67sClYpHHjPAgnJMQcvGXqgSs9BdP0K9iqPrW0rDQIRx9SjvTWdlpERytT6remMgRjtyXuwxswtpXLl8=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>l3j/hH8X86AYyaa9BiIV7gGghsAMc9OojDkQnP5zh/dARW0qTTLSHp0cadC8vOyIlZayB+G5tXXa8lKYczDQuSX67uzffi+e6buXBUK0lRx8EyQOgBtoasVX7aD6Iw75fRaE2PlUWfFWM0YmyehA0014Q+sQ++oKO4xazvMoRBc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB4TCCAUqgAwIBAgIQfXs6yVwfZIhAbxLxZ2D6VTANBgkqhkiG9w0BAQUFADAvMS0wKwYDVQQDHiQAVABIAEUARgBBAEMARQBCAE8ATwBLAFwAYQByAHQAZQBtAHAwHhcNMTMwOTAxMjMxMDE2WhcNMTQwOTAyMDUxMDE2WjAvMS0wKwYDVQQDHiQAVABIAEUARgBBAEMARQBCAE8ATwBLAFwAYQByAHQAZQBtAHAwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAJd4/4R/F/OgGMmmvQYiFe4BoIbADHPTqIw5EJz+c4f3QEVtKk0y0h6dHGnQvLzsiJWWsgfhubV12vJSmHMw0Lkl+u7s334vnum7lwVCtJUcfBMkDoAbaGrFV+2g+iMO+X0WhNj5VFnxVjNGJsnoQNNNeEPrEPvqCjuMWs7zKEQXAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAgAM9fiTW4zSwb2QsgHOkXVwBnECQrs07EAybKwcjmj1sXHoCP8RAOONOy10fswvuJSn9AUCJDUK2pw9hRin3BPwfHZ3JEiggIDYFdCjpfbkx8p70Pip1JmOv4DdNvYhGMbKGKPSKzJ5zuk6DEK/5JOg25UKuY4OTov3MCJ9VXfE=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

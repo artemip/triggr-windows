@@ -11,80 +11,49 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Triggr.Events.Reaction;
+using Triggr.Networking;
+using Triggr.Utilities;
 
-namespace Triggr
+namespace Triggr.ViewModels
 {
-    public enum DeviceStatus { INCOMING_CALL, OUTGOING_CALL, CALL_ENDED, IDLE, NOT_CONNECTED }
-
-    class TriggrViewModel : INotifyPropertyChanged, IDisposable
+    public class TriggrViewModel : INotifyPropertyChanged, IDisposable
     {        
-        private int _volume = -1;
         private string _pairingKey;
         private bool _pairingModeEnabled = false;
-        private bool _serverConnected = false;
-        private TriggrHttpServer _httpServer;
-        private DeviceStatus _status = DeviceStatus.NOT_CONNECTED;
-        private string _callerName;
-        private string _callerId;
+        private SocketServer _socketServer;
 
         public static TriggrViewModel Model = new TriggrViewModel();
+        public static NotificationViewModel NotificationModel = new NotificationViewModel();
 
-        private void VolumeChangeHandler(CoreAudioApi.AudioVolumeNotificationData data)
-        {
-            VolumePercentage = (int)(data.MasterVolume * 100);
-        }
+        private TriggrViewModel() {
+            var volumeController = new VolumeController();
+            var eventHandler = new Events.EventHandler(volumeController);
+            var socketMessageHandler = new SocketMessageHandler(eventHandler);
 
-        private TriggrViewModel() {            
-            _serverConnected = TriggrSocketServer.Start();
-            HeartbeatListener.Start();
-
-            //Subscribe to volume changes
-            VolumeController.Controller.SubscribeToVolumeChanges(VolumeChangeHandler);
+            _socketServer = new SocketServer(socketMessageHandler);
+            _socketServer.Start();
         }
 
         public void Dispose()
         {
-            if (TriggrSocketServer.Started)
+            _socketServer.Dispose();
+        }
+
+        public string DeviceID
+        {
+            get
             {
-                TriggrSocketServer.Stop();
+                string deviceId = Properties.Settings.Default.DeviceID;
+
+                if (deviceId == "")
+                {
+                    deviceId = Properties.Settings.Default.DeviceID = Guid.NewGuid().ToString();
+                    Properties.Settings.Default.Save();
+                }
+
+                return deviceId;
             }
-            HeartbeatListener.Stop();
-        }
-
-        public static string DeviceId()
-        {
-            string deviceId = Properties.Settings.Default.DeviceID;
-
-            if (deviceId == "")
-            {
-                deviceId = Properties.Settings.Default.DeviceID = Guid.NewGuid().ToString();
-                Properties.Settings.Default.Save();
-            }
-
-            return deviceId;
-        }
-
-        private int getFreeTCPPort()
-        {
-            TcpListener l = new TcpListener(IPAddress.Loopback, 0);
-            l.Start();
-            int port = ((IPEndPoint)l.LocalEndpoint).Port;
-            l.Stop();
-            return port;
-        }
-       
-        private void SetUpHttpServer(int port)
-        {
-            _httpServer = new TriggrHttpServer(port);
-            _httpServer.Start();
-        }
-
-        public bool ServerConnected { 
-            get { return _serverConnected; }
-            set {
-                _serverConnected = value;
-                NotifyPropertyChanged("ServerConnected");
-            } 
         }
 
         public bool PairingModeEnabled
@@ -95,47 +64,16 @@ namespace Triggr
             {
                 if (value)
                 {
-                    HeartbeatListener.Stop();
-
                     var key = new Base62(new Random().Next((int)Math.Pow(62, 5))).ToString(); // Base-62 * 5 characters
                     var padding = new String('0', 5 - key.Length); //Add padding to make 5 characters
 
                     PairingKey = padding + key;
 
-                    TriggrSocketServer.Send("pairing_key:" + PairingKey + "\r\n");
-                }
-                else
-                {
-                    HeartbeatListener.Start();
+                    _socketServer.SendPairingKey(PairingKey);
                 }
 
                 _pairingModeEnabled = value;
                 NotifyPropertyChanged("PairingModeEnabled");
-            }
-        }
-
-        public int VolumePercentage
-        {
-            get {
-                if (_volume == -1) 
-                    _volume = (int)(VolumeController.Controller.Volume * 100);
-                
-                return _volume; 
-            }
-            set 
-            {
-                _volume = value;
-                NotifyPropertyChanged("VolumePercentage");
-            }
-        }
-
-        public DeviceStatus Status
-        {
-            get { return _status; }
-            set
-            {
-                _status = value;
-                NotifyPropertyChanged("Status");
             }
         }
 
@@ -144,25 +82,6 @@ namespace Triggr
             set {
                 _pairingKey = value;
                 NotifyPropertyChanged("PairingKey");
-            }
-        }
-
-        public string CallerName
-        {
-            get { return _callerName; }
-            set
-            {
-                _callerName = value;
-                NotifyPropertyChanged("CallerName");
-            }
-        }
-
-        public string CallerId
-        {
-            get { return _callerId; }
-            set {
-                _callerId = value;
-                NotifyPropertyChanged("CallerId");
             }
         }
 

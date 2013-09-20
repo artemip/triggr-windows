@@ -5,9 +5,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace Triggr
+namespace Triggr.Networking
 {
-    static class SocketHelper
+    static class SocketUtils
     {
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Triggr
             Socket s;
             try
             {
-                s = SocketHelper.ConnectSocket(server, port);
+                s = SocketUtils.ConnectSocket(server, port);
             }
             catch (SocketException e)
             {

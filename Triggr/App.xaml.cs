@@ -18,9 +18,12 @@ namespace Triggr
     {
         [DllImport("user32.dll")]
         private static extern Boolean ShowWindow(IntPtr hWnd, Int32 nCmdShow);
-        
+
+        private MainWindow _win;
+
         protected override void OnStartup(StartupEventArgs e)
         {
+            // Disallow multiple Triggr processes from running at the same time
             Process currentProcess = Process.GetCurrentProcess();
             var runningProcess = (from process in Process.GetProcesses()
                                   where
@@ -38,11 +41,7 @@ namespace Triggr
 
             base.OnStartup(e);
 
-            //Handle automatic startup
-            //Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\", "Triggr", "\"" + Assembly.GetExecutingAssembly().Location + "\"", RegistryValueKind.String);
-
-            //Open window
-            var win = new MainWindow();
+            _win = new MainWindow();
         }
     }
 }

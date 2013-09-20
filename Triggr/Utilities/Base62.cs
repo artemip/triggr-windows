@@ -1,6 +1,6 @@
 using System;
 
-namespace Triggr
+namespace Triggr.Utilities
 {
     /// <summary>
     /// Convert a number to base 62 (0-9a-zA-Z)

@@ -4,18 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Net.Sockets;
+using Triggr.ViewModels;
+using Triggr;
 
-namespace Triggr
+namespace Triggr.Networking
 {
-    public class SocketServerNotStartedException : Exception
+    public class SocketServer : IDisposable
     {
-        public SocketServerNotStartedException(string message)
-            : base(message)
-        { }
-    }
+        public class SocketServerNotStartedException : Exception
+        {
+            public SocketServerNotStartedException(string message)
+                : base(message)
+            { }
+        }
 
-    static class TriggrSocketServer
-    {
         // State object for reading client data asynchronously
         private class StateObject
         {
@@ -29,15 +31,25 @@ namespace Triggr
             public StringBuilder sb = new StringBuilder();
         }
 
-        private static string _deviceId = TriggrViewModel.DeviceId();
-        private static Socket _socket;
-        private static bool _started;
+        private Socket _socket;
+        private bool _started;
+        private SocketMessageHandler _socketMessageHandler;
 
-        public static bool Start()
+        public SocketServer(SocketMessageHandler socketMessageHandler)
+        {
+            _socketMessageHandler = socketMessageHandler;
+        }
+
+        public void Dispose()
+        {
+            Stop();
+        }
+
+        public bool Start()
         {
             if (_started) return true;
 
-            _socket = SocketHelper.OpenSocketConnection("api.triggrapp.com", 9090);
+            _socket = SocketUtils.OpenSocketConnection("api.triggrapp.com", 9090);
 
             if (_socket == null)
             {
@@ -52,24 +64,24 @@ namespace Triggr
 
             _socket.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state);
 
-            Send("device_id:" + _deviceId + "\r\n");
-
+            SendHandshake();
+            
             return true;
         }
 
-        public static bool Started
+        public bool Started
         {
             get { return _started; }
         }
 
-        public static void Stop()
+        public void Stop()
         {
             try
             {
                 if (_socket != null)
                 {
                     _socket.Shutdown(SocketShutdown.Both);
-                   _socket.Close();
+                    _socket.Close();
                 }
 
                 _started = false;
@@ -80,7 +92,7 @@ namespace Triggr
             }
         }
 
-        private static void ReadCallback(IAsyncResult ar) 
+        private void ReadCallback(IAsyncResult ar) 
         {
             string content = "";
 
@@ -110,7 +122,7 @@ namespace Triggr
                 content = state.sb.ToString();
                 if (content.IndexOf("\r\n") > -1)
                 {
-                    SocketEventHandler.HandleEvent(content.Replace("\r\n", ""));
+                    _socketMessageHandler.HandleMessage(content.Replace("\r\n", ""));
                     state.sb.Clear();
                 }
 
@@ -118,36 +130,42 @@ namespace Triggr
             }
             else //Socket has disconnected. Reconnect...
             {
-                _started = TriggrViewModel.Model.ServerConnected = false; //Inform the Model
-
                 Timer reconnectTimer = new Timer(x => { }, null, 0, 0);
 
                 reconnectTimer = new Timer(t =>
                 {
                     if (Start()) //Socket has connected
                     {
-                        TriggrViewModel.Model.ServerConnected = true;
                         reconnectTimer.Dispose();
                     }
-                }, null, 0, 7000); //Retry every 5 seconds
-
+                }, null, 0, (new Random()).Next(5000, 30000)); //Retry every 5 - 30 seconds (avoid server load)
             }
         }
 
-        public static void Send(string data)
+        public void SendPairingKey(string pairingKey)
+        {
+            Send("pairing_key:" + pairingKey + "\r\n");
+        }
+
+        private void SendHandshake()
+        {
+            Send("device_id:" + TriggrViewModel.Model.DeviceID + "\r\n");
+        }
+
+        private void Send(string data)
         {
             while (!_started) Start();
             Send(_socket, data);
         }
 
-        private static void Send(Socket socket, string data)
+        private void Send(Socket socket, string data)
         {
             byte[] byteData = Encoding.ASCII.GetBytes(data);
 
             socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallback), socket);
         }
 
-        private static void SendCallback(IAsyncResult ar)
+        private void SendCallback(IAsyncResult ar)
         {
             var socket = (Socket) ar.AsyncState;
             var bytesSent = socket.EndSend(ar);            

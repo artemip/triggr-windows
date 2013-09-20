@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using CoreAudioApi;
 
-namespace Triggr
+namespace Triggr.Events.Reaction
 {    
     /// <summary>
     /// Interfaces with the VolumeControllerHelper to perform volume-related tasks
@@ -18,12 +18,10 @@ namespace Triggr
         private MMDeviceEnumerator _deviceEnum;
         private MMDevice _device;
 
-        public static readonly VolumeController Controller = new VolumeController();
-
         /// <summary>
         /// Start the VolumeController
         /// </summary>
-        private VolumeController()
+        public VolumeController()
         {
             _deviceEnum = new MMDeviceEnumerator();
             _device = _deviceEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);           
@@ -35,7 +33,7 @@ namespace Triggr
             set { _oldVolume = (value > 100F) ? 100F : value; }
         }
 
-        public void LowerVolume()
+        public virtual void LowerVolume()
         {
             LowerVolume(LOW_VOLUME);
         }
@@ -48,7 +46,7 @@ namespace Triggr
             }
         }
 
-        public void RestoreVolume() {
+        public virtual void RestoreVolume() {
             Volume = OldVolume;
         }
 
