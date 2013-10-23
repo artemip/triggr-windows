@@ -9,14 +9,17 @@ namespace Triggr.Events
     [DataContract]
     public class Event
     {
+        [DataMember(Name = "sender_id")]
+        public string SenderID { get; set; }
+
         [DataMember(Name = "type")]
         public string Type { get; set; }
 
         [DataMember(Name = "notification")]
         public Notification Notification { get; set; }
 
-        [DataMember(Name = "handler")]
-        public string Handler { get; set; }
+        [DataMember(Name = "handlers")]
+        public string[] Handlers { get; set; }
     }
 
     [DataContract]

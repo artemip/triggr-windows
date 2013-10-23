@@ -105,14 +105,22 @@ namespace Triggr
             // Enable tray icon
             icon.Visible = true;
 
-            // If application is new, open it
-            if (ApplicationDeployment.CurrentDeployment.IsFirstRun || DateTime.Now - Properties.Settings.Default.LastLaunch > TimeSpan.FromDays(15))
+            var showBalloon = true;
+
+            try
             {
-                this.Show();
+                showBalloon = !ApplicationDeployment.CurrentDeployment.IsFirstRun && DateTime.Now - Properties.Settings.Default.LastLaunch < TimeSpan.FromDays(15);
+            } catch(InvalidDeploymentException) {
+                showBalloon = true;
             }
-            else // Otherwise, show a balloon tooltip
+
+            if (showBalloon)
             {
                 icon.ShowBalloonTip(5000, "", "Triggr is running in the background", ToolTipIcon.Info);
+            }
+            else
+            {
+                this.Show();
             }
 
             Properties.Settings.Default.LastLaunch = DateTime.Now;

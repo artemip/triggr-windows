@@ -40,7 +40,7 @@ namespace Triggr.ViewModels
             _socketServer.Dispose();
         }
 
-        public string DeviceID
+        public static string DeviceID
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Triggr.ViewModels
 
                     _socketServer.SendPairingKey(PairingKey);
                 }
-
+                 
                 _pairingModeEnabled = value;
                 NotifyPropertyChanged("PairingModeEnabled");
             }

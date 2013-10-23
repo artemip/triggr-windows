@@ -120,6 +120,7 @@
     </ApplicationDefinition>
     <Compile Include="Events\EventHandler.cs" />
     <Compile Include="Events\Event.cs" />
+    <Compile Include="Networking\ServerRequest.cs" />
     <Compile Include="UserControls\TriggrLogo.xaml.cs">
       <DependentUpon>TriggrLogo.xaml</DependentUpon>
     </Compile>

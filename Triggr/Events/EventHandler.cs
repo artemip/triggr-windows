@@ -18,15 +18,22 @@ namespace Triggr.Events
 
         public void React(Event evt)
         {
-            if (evt.Handler == "lower_volume")
+            if (evt.Handlers.Contains("notify"))
+            {
+                //Display notification
+            }
+            
+            if (evt.Handlers.Contains("lower_volume"))
             {
                 _volumeController.LowerVolume();
             }
-            else if (evt.Handler == "restore_volume")
+            
+            if (evt.Handlers.Contains("restore_volume"))
             {
                 _volumeController.RestoreVolume();
             }
-            else if (evt.Handler == "alert_noise")
+            
+            if (evt.Handlers.Contains("alert_noise"))
             {
                 //TODO
             }

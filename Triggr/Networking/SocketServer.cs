@@ -6,6 +6,8 @@ using System.Threading;
 using System.Net.Sockets;
 using Triggr.ViewModels;
 using Triggr;
+using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace Triggr.Networking
 {
@@ -49,7 +51,7 @@ namespace Triggr.Networking
         {
             if (_started) return true;
 
-            _socket = SocketUtils.OpenSocketConnection("api.triggrapp.com", 9090);
+            _socket = SocketUtils.OpenSocketConnection("ec2-107-21-171-184.compute-1.amazonaws.com", 9090);
 
             if (_socket == null)
             {
@@ -132,6 +134,8 @@ namespace Triggr.Networking
             {
                 Timer reconnectTimer = new Timer(x => { }, null, 0, 0);
 
+                _started = false;
+
                 reconnectTimer = new Timer(t =>
                 {
                     if (Start()) //Socket has connected
@@ -142,14 +146,27 @@ namespace Triggr.Networking
             }
         }
 
+        private string CreateJSONRequest(ServerRequest request)
+        {
+            var memStream = new MemoryStream();
+            var serializer = new DataContractJsonSerializer(typeof(ServerRequest));
+
+            serializer.WriteObject(memStream, request);
+            memStream.Position = 0;
+
+            return new StreamReader(memStream).ReadToEnd();
+        }
+
         public void SendPairingKey(string pairingKey)
         {
-            Send("pairing_key:" + pairingKey + "\r\n");
+            var request = new ServerRequest("register_pairing_key", pairingKey);
+            Send(CreateJSONRequest(request) + "\r\n");
         }
 
         private void SendHandshake()
         {
-            Send("device_id:" + TriggrViewModel.Model.DeviceID + "\r\n");
+            var request = new ServerRequest("register_device", TriggrViewModel.DeviceID);
+            Send(CreateJSONRequest(request) + "\r\n");
         }
 
         private void Send(string data)
