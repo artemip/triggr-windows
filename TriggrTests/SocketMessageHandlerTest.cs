@@ -29,7 +29,8 @@ namespace TriggrTests
         public void TestLowerVolumeEvent()
         {
             var volumeControllerMock = new Mock<Triggr.Events.Reaction.VolumeController>();
-            var eventHandler = new Triggr.Events.EventHandler(volumeControllerMock.Object);
+            var notificationControllerMock = new Mock<Triggr.Events.Reaction.NotificationController>();
+            var eventHandler = new Triggr.Events.EventHandler(volumeControllerMock.Object, notificationControllerMock.Object);
             volumeControllerMock.Setup(v => v.LowerVolume()).Verifiable();
 
             var eventJSON = CreateTestJson(new string[] { "lower_volume" });
@@ -44,7 +45,8 @@ namespace TriggrTests
         public void TestRestoreVolumeEvent()
         {
             var volumeControllerMock = new Mock<Triggr.Events.Reaction.VolumeController>();
-            var eventHandler = new Triggr.Events.EventHandler(volumeControllerMock.Object);
+            var notificationControllerMock = new Mock<Triggr.Events.Reaction.NotificationController>();
+            var eventHandler = new Triggr.Events.EventHandler(volumeControllerMock.Object, notificationControllerMock.Object);
             volumeControllerMock.Setup(v => v.RestoreVolume()).Verifiable();
 
             var eventJSON = CreateTestJson(new string[] { "restore_volume" });
@@ -59,7 +61,8 @@ namespace TriggrTests
         public void TestLowerVolumeAndNotifyEvent()
         {
             var volumeControllerMock = new Mock<Triggr.Events.Reaction.VolumeController>();
-            var eventHandler = new Triggr.Events.EventHandler(volumeControllerMock.Object);
+            var notificationControllerMock = new Mock<Triggr.Events.Reaction.NotificationController>();
+            var eventHandler = new Triggr.Events.EventHandler(volumeControllerMock.Object, notificationControllerMock.Object);
             volumeControllerMock.Setup(v => v.RestoreVolume()).Verifiable();
 
             var eventJSON = CreateTestJson(new string[] { "restore_volume", "notify" });

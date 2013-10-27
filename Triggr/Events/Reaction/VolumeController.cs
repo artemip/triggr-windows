@@ -18,13 +18,29 @@ namespace Triggr.Events.Reaction
         private MMDeviceEnumerator _deviceEnum;
         private MMDevice _device;
 
-        /// <summary>
-        /// Start the VolumeController
-        /// </summary>
-        public VolumeController()
+
+        private void _setEndpointVolume()
         {
             _deviceEnum = new MMDeviceEnumerator();
-            _device = _deviceEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);           
+            _device = _deviceEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+        }
+
+        /// <summary>
+        /// Safe method to access the system volume
+        /// </summary>
+        private AudioEndpointVolume _getEndpointVolume()
+        {
+            if (_device == null) _setEndpointVolume();
+
+            try
+            {
+                return _device.AudioEndpointVolume;
+            }
+            catch (InvalidCastException ex) // Due to threading issues
+            {
+                _setEndpointVolume();
+                return _device.AudioEndpointVolume;
+            }
         }
 
         public float OldVolume
@@ -52,12 +68,12 @@ namespace Triggr.Events.Reaction
 
         public void Mute()
         {
-            _device.AudioEndpointVolume.Mute = true;
+            _getEndpointVolume().Mute = true;
         }
 
         public void UnMute()
         {
-            _device.AudioEndpointVolume.Mute = false;
+            _getEndpointVolume().Mute = false;
         }
 
         public float Volume
@@ -66,7 +82,7 @@ namespace Triggr.Events.Reaction
                 float vol = -1;
                 while (vol == -1)
                 {
-                    vol = (_device.AudioEndpointVolume.Mute) ? 0 : _device.AudioEndpointVolume.MasterVolumeLevelScalar;
+                    vol = (_getEndpointVolume().Mute) ? 0 : _getEndpointVolume().MasterVolumeLevelScalar;
                 }
                 return vol;
             }
@@ -86,15 +102,15 @@ namespace Triggr.Events.Reaction
                     Thread.Sleep(15);
                     if (lowerVolume)
                     {
-                        _device.AudioEndpointVolume.MasterVolumeLevelScalar -= stepAmount;
+                        _getEndpointVolume().MasterVolumeLevelScalar -= stepAmount;
                     }
                     else
                     {
-                        _device.AudioEndpointVolume.MasterVolumeLevelScalar += stepAmount;
+                        _getEndpointVolume().MasterVolumeLevelScalar += stepAmount;
                     }
                 }
 
-                _device.AudioEndpointVolume.MasterVolumeLevelScalar = value;
+                _getEndpointVolume().MasterVolumeLevelScalar = value;
             }
         }
 
@@ -102,7 +118,7 @@ namespace Triggr.Events.Reaction
 
         public void SubscribeToVolumeChanges(VolumeNotificationHandler handler)
         {
-            _device.AudioEndpointVolume.OnVolumeNotification += new AudioEndpointVolumeNotificationDelegate(handler);
+            _getEndpointVolume().OnVolumeNotification += new AudioEndpointVolumeNotificationDelegate(handler);
         }
     }
 }

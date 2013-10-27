@@ -144,11 +144,13 @@ namespace Triggr
             {
                 e.Cancel = true;
                 this.Hide();
-                if (ApplicationDeployment.CurrentDeployment.IsFirstRun)
+                try
                 {
-                    icon.ShowBalloonTip(5000, "", "Triggr is running in the background", ToolTipIcon.Info);
-                    Properties.Settings.Default.Save();
-                }
+                    if (ApplicationDeployment.CurrentDeployment.IsFirstRun)
+                    {
+                        icon.ShowBalloonTip(5000, "", "Triggr is running in the background", ToolTipIcon.Info);
+                    }
+                } catch(InvalidDeploymentException) { }
             }
             else
             {
@@ -173,9 +175,22 @@ namespace Triggr
             TriggrViewModel.Model.PairingModeEnabled = true;
         }
 
-        private void HandleCloseClick(object sender, RoutedEventArgs e)
+        private void HandleHideClick(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
+        }
+
+        private void HandleHelpClick(object sender, RoutedEventArgs e)
+        {
+            Process.Start(GetDefaultBrowserPath(), "http://triggrapp.com/docs/");
+        }
+
+        private static string GetDefaultBrowserPath()
+        {
+            string key = @"http\shell\open\command";
+            RegistryKey registryKey =
+            Registry.ClassesRoot.OpenSubKey(key, false);
+            return ((string)registryKey.GetValue(null, null)).Split('"')[1];
         }
     }
 }

@@ -24,11 +24,11 @@ namespace Triggr.ViewModels
         private SocketServer _socketServer;
 
         public static TriggrViewModel Model = new TriggrViewModel();
-        public static NotificationViewModel NotificationModel = new NotificationViewModel();
 
         private TriggrViewModel() {
             var volumeController = new VolumeController();
-            var eventHandler = new Events.EventHandler(volumeController);
+            var notificationController = new NotificationController();
+            var eventHandler = new Events.EventHandler(volumeController, notificationController);
             var socketMessageHandler = new SocketMessageHandler(eventHandler);
 
             _socketServer = new SocketServer(socketMessageHandler);

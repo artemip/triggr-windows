@@ -2,7 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:l="clr-namespace:Triggr"
+        xmlns:lc="clr-namespace:Triggr.Converters"
         TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType"
         AllowsTransparency="True"
         Title="Triggr"
         SizeToContent="WidthAndHeight"
@@ -11,6 +13,7 @@
         WindowStyle="None"
         ResizeMode="NoResize">
     <Window.Resources>
+        <lc:InvertedBoolToVisibilityConverter x:Key="invertedBoolToVisibilityConverter" />
         <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
     </Window.Resources>
     <Border
@@ -18,18 +21,17 @@
         BorderBrush="Black">
         <Border.Effect>
             <DropShadowEffect
-                Opacity="0.999"
-                BlurRadius="16"
-                ShadowDepth="6"
+                Opacity="0.8"
+                BlurRadius="6"
+                ShadowDepth="2"
                 Color="#FF222222"/>
         </Border.Effect>
         <Grid
-            Height="191" 
-            Width="468">
+            Height="190" 
+            Width="330">
             <Grid.Background>
-                <ImageBrush ImageSource="..\Resources\Images\background2.png" />
+                <ImageBrush ImageSource="..\Resources\Images\background.png" />
             </Grid.Background>
-
             <StackPanel>
                 <Border BorderThickness="0, 0, 0, 1">
                     <Border.Effect>
@@ -40,112 +42,82 @@
                             Color="Black" 
                             Direction="270"/>
                     </Border.Effect>
-                    <Grid 
+                    <DockPanel
                         Name="ChromeTop"
                         Height="28"
-                        Background="#BB0B0B0B"
+                        Margin="0, 0, 0, 0"
+                        Background="#00000000"
                         MouseDown="HandleHeaderMouseDown">
-                        <Button
+                        <TextBlock
+                            Name="HideButton"
+                            DockPanel.Dock="Right"
+                            VerticalAlignment="Center"
+                            MouseUp="HandleHideClick"
+                            Height="22"
+                            Width="30"
+                            Margin="3, 3, 6, 3"                       
+                            FontSize="13"
+                            Foreground="#FFFFFFFF"
+                            Style="{StaticResource HighlightOnMouseOverStyle}" 
+                            TextAlignment="Center"
+                            Text="hide" />
+                        <TextBlock 
+                            DockPanel.Dock="Right"
+                            VerticalAlignment="Center"
+                            Foreground="#FFFFFF"
+                            Height="22"
+                            Margin="0, 0, 0, 5"
+                            FontSize="16"
+                            Text=" | " />
+                        <TextBlock
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
-                            Click="HandleCloseClick"
-                            Style="{StaticResource CloseButtonStyle}" 
-                            Height="22" 
+                            MouseUp="HandleHelpClick"
+                            Height="22"
                             Width="30"
-                            Margin="0, 3, 3, 3">
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                            Text="r"
-                            FontFamily="Webdings"
-                            Foreground="White"
-                            FontSize="10" />
-                        </Button>
-                    </Grid>
+                            Margin="3, 3, 3, 3"                       
+                            FontSize="13"
+                            Foreground="#FFFFFFFF"
+                            Style="{StaticResource HighlightOnMouseOverStyle}" 
+                            TextAlignment="Center"
+                            Text="help" />
+                    </DockPanel>
                 </Border>
-                <Grid Name="Header" Height="64" Margin="10, -10, 10, 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="128" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid Name="AppName" Grid.Column="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="24" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Image 
-                                Source="../Resources/Images/triggr_icon.png" 
-                                Grid.Column="0"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"/>
-                        <l:TriggrLogo 
-                                Margin="-8, 0, 0, 0"
-                                HorizontalAlignment="Left"
-                                Grid.Column="1">
-                            <l:TriggrLogo.LayoutTransform>
-                                <ScaleTransform ScaleX=".258" ScaleY=".258" />
-                            </l:TriggrLogo.LayoutTransform>
-                        </l:TriggrLogo>
-                    </Grid>
-                    <Grid Name="PairSection" Grid.Column="1">
+                <StackPanel 
+                    Name="MainSection" 
+                    Margin="10, 10, 10, 10">
+                    <l:TriggrLogo 
+                                Margin="0, -25, 0, 0"
+                                HorizontalAlignment="Center">
+                        <l:TriggrLogo.LayoutTransform>
+                            <ScaleTransform ScaleX=".45" ScaleY=".4" />
+                        </l:TriggrLogo.LayoutTransform>
+                    </l:TriggrLogo>
+                    <Grid 
+                        Name="PairSection"
+                        HorizontalAlignment="Center">
                         <TextBlock 
-                        Visibility="{Binding PairingModeEnabled, Converter={StaticResource boolToVisibilityConverter}}" 
-                        Foreground="Gray"
-                        FontSize="16"
-                        FontWeight="SemiBold"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center">
+                            Visibility="{Binding PairingModeEnabled, Converter={StaticResource boolToVisibilityConverter}}" 
+                            Margin="0, 0, 0, 0"
+                            Foreground="White"
+                            FontSize="18"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource FontStyle}">
                             <Run Text="Pair Key:"/> <Run Text="{Binding PairingKey}" />
                         </TextBlock>
                         <Button 
-                        Content="Show Pair Key" 
-                        Height="28" 
-                        Width="130"
-                        HorizontalAlignment="Right"
-                        FontSize="14"
-                        Foreground="White"
-                        Style="{StaticResource CustomButtonStyle}"
-                        Click="InitiatePairing" />
+                            Visibility="{Binding PairingModeEnabled, Converter={StaticResource invertedBoolToVisibilityConverter}}" 
+                            Content="Show Pair Key" 
+                            Height="40" 
+                            Width="160"
+                            HorizontalAlignment="Right"
+                            FontSize="16"
+                            Foreground="White"
+                            Style="{StaticResource CustomButtonStyle}"
+                            Click="InitiatePairing" />
                     </Grid>
-                </Grid>
-                <Grid Name="Footer" Height="103">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Image
-                        Source="../Resources/Images/volume_glyph.png"
-                        Height="26" 
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Margin="15, 10, 0, 0"
-                        Grid.Row="0"/>
-                        <TextBlock 
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Width="90" 
-                        FontSize="36" 
-                        Style="{StaticResource FontStyle}">
-                        <Run Text="{Binding VolumePercentage}" /> <TextBlock Margin="-8, 0, 0, 0" Text="%" />
-                    </TextBlock>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <!--"{Binding Status, Converter={StaticResource statusToImagePathConverter}}"-->
-                        <Image
-                        Source="../Resources/Images/device_idle.png"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Margin="15, 10, 0, 0"
-                        Height="20" />
-                        <TextBlock 
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Center" 
-                        FontSize="24"
-                        Style="{StaticResource FontStyle}">
-                        <!--<Run Text="{Binding Status, Converter={StaticResource statusToStringConverter}}" />-->
-                        </TextBlock>
-                    </Grid>
-                </Grid>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Border>

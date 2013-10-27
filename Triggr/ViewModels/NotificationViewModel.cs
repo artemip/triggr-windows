@@ -9,27 +9,24 @@ namespace Triggr.ViewModels
 {
     public class NotificationViewModel : INotifyPropertyChanged, IDisposable
     {
-        private Event _event;
+        private Notification _notification;
 
-        public NotificationViewModel()
-        {
+        public NotificationViewModel(Notification notification) {
+            Notification = notification;   
         }
 
-        public void Dispose()
-        {
+        public void Dispose() { }
 
-        }
-
-        public Event Event
+        public Notification Notification
         {
             get
             {
-                return _event;
+                return _notification;
             }
             set
             {
-                _event = value;
-                NotifyPropertyChanged("Event");
+                _notification = value;
+                NotifyPropertyChanged("Notification");
             }
         }
 

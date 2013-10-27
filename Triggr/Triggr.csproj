@@ -118,9 +118,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Events\EventHandler.cs" />
     <Compile Include="Events\Event.cs" />
+    <Compile Include="Events\Reaction\NotificationController.cs" />
+    <Compile Include="Networking\FileCache.cs" />
     <Compile Include="Networking\ServerRequest.cs" />
+    <Compile Include="UserControls\CachedImage.cs" />
     <Compile Include="UserControls\TriggrLogo.xaml.cs">
       <DependentUpon>TriggrLogo.xaml</DependentUpon>
     </Compile>
@@ -132,7 +136,7 @@
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Networking\SocketMessageHandler.cs" />
-    <Compile Include="Converters\InvertedVisibilityConverter.cs" />
+    <Compile Include="Converters\InvertedBoolToVisibilityConverter.cs" />
     <Compile Include="Windows\NotificationWindow.xaml.cs">
       <DependentUpon>NotificationWindow.xaml</DependentUpon>
     </Compile>
@@ -219,45 +223,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\triggr_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\call_ended.png" />
-    <Resource Include="Resources\Images\device_idle.png" />
-    <Resource Include="Resources\Images\call_started.png" />
-    <Resource Include="Resources\Images\not_connected.png" />
-    <Resource Include="Resources\Images\volume_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\get_pair_code_button.png" />
-    <Resource Include="Resources\Images\get_pair_code_button_pressed.png" />
-    <Resource Include="Resources\Images\pair_code_background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\call_ended_notification.png" />
-    <Resource Include="Resources\Images\call_started_notification.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\dock.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\background2.png" />
-    <Resource Include="Resources\Images\TriggrLogo.png" />
-    <Resource Include="Resources\Images\volume_glyph.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\triggr_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="triggr_icon.ico" />
     <Resource Include="Resources\Images\close_glyph.png" />
-    <Resource Include="Resources\Images\message_glyph.png" />
-    <Resource Include="Resources\Images\phone_glyph.png" />
-    <Resource Include="Resources\Images\triggr_icon.ico" />
     <Resource Include="Resources\Images\favicon.ico" />
-    <Content Include="Resources\Images\triggr_logo.svg" />
+    <Resource Include="Resources\Images\triggr_icon.ico" />
+    <Resource Include="Resources\Images\triggr_icon.png" />
+    <Resource Include="triggr_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\title.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

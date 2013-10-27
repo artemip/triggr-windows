@@ -7,9 +7,19 @@
             <Style x:Key="FontStyle" TargetType="{x:Type TextBlock}">
                 <Setter Property="FontFamily" Value="{StaticResource OpenSans}" />
                 <Setter Property="FontWeight" Value="Light" />
-                <Setter Property="Foreground" Value="#FFA8A8A8" />
+                <Setter Property="Foreground" Value="#FFFFFFFF" />
                 <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
             </Style>
+
+            <Style x:Key="HighlightOnMouseOverStyle" TargetType="{x:Type TextBlock}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="#FF24B4FE" />
+                        <Setter Property="Cursor" Value="Hand" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
             <Style x:Key="ButtonFont" BasedOn="{StaticResource FontStyle}" TargetType="{x:Type Button}">
                 <Setter Property="TextElement.Foreground" Value="White" />
             </Style>
@@ -21,7 +31,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/ButtonStylesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

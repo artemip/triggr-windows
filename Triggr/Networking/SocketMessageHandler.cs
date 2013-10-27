@@ -39,7 +39,6 @@ namespace Triggr.Networking
                     evt = (jsonSerializer.ReadObject(stringStream)) as Event;
                 }
 
-                TriggrViewModel.NotificationModel.Event = evt;
                 _eventHandler.React(evt);
             }
         }
