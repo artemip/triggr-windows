@@ -27,6 +27,8 @@ namespace Triggr.Events.Reaction
 
         public void notify(Notification notification)
         {
+            filterNotification(notification);
+
             var notificationViewModel = new NotificationViewModel(notification);
             var notificationWindow = new NotificationWindow(notificationViewModel);
 
@@ -58,6 +60,13 @@ namespace Triggr.Events.Reaction
                 notificationWindow.BeginAnimation(UIElement.OpacityProperty, waitAnimation);
             };
             notificationWindow.BeginAnimation(UIElement.OpacityProperty, showAnimation);
+        }
+
+        private void filterNotification(Notification notification)
+        {
+            notification.Title = notification.Title.Trim();
+            notification.Subtitle = notification.Subtitle.Trim();
+            notification.Description = notification.Description.Trim();
         }
     }
 }

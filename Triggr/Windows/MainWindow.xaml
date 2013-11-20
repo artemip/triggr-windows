@@ -98,7 +98,7 @@
                         HorizontalAlignment="Center">
                         <TextBlock 
                             Visibility="{Binding PairingModeEnabled, Converter={StaticResource boolToVisibilityConverter}}" 
-                            Margin="0, 0, 0, 0"
+                            Margin="0, 6, 0, 0"
                             Foreground="White"
                             FontSize="18"
                             HorizontalAlignment="Center"

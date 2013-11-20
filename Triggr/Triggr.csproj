@@ -26,8 +26,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://www.triggrapp.com/download/current/</InstallUrl>
-    <UpdateUrl>http://www.triggrapp.com/download/update/</UpdateUrl>
+    <InstallUrl>http://www.triggrapp.com/download/test/current/</InstallUrl>
+    <UpdateUrl>http://www.triggrapp.com/download/test/update/</UpdateUrl>
     <SupportUrl>http://www.fether.co</SupportUrl>
     <TargetCulture>en</TargetCulture>
     <ProductName>Triggr</ProductName>
@@ -35,8 +35,8 @@
     <MinimumRequiredVersion>1.1.1.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.1.2.0</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>2.0.0.2</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

@@ -34,7 +34,7 @@ namespace Triggr.Networking
                 DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Event));
                 Event evt;
 
-                using (Stream stringStream = new MemoryStream(UTF8Encoding.Default.GetBytes(eventJSON ?? "")))
+                using (Stream stringStream = new MemoryStream(Encoding.UTF8.GetBytes(eventJSON ?? "")))
                 {
                     evt = (jsonSerializer.ReadObject(stringStream)) as Event;
                 }
