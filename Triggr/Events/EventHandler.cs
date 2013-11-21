@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
@@ -50,7 +51,9 @@ namespace Triggr.Events
             
             if (evt.Handlers.Contains("alert_noise"))
             {
-                //TODO
+                System.Media.SystemSounds.Hand.Play();
+                //Uri notificationUri = new Uri(@"pack://application:,,,/Resources/Sounds/notification.mp3");
+                //(new SoundPlayer(Application.GetResourceStream(notificationUri).Stream)).Play();
             }
         }
 

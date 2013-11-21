@@ -12,15 +12,22 @@ namespace Triggr.Events.Reaction
 {
     public class NotificationController
     {
-        private int _numNotifications;
+        private bool[] _availableNotificationSpots;
         private double _screenWidth;
         private double _screenHeight;
         private readonly TimeSpan _fadeInDuration = TimeSpan.FromSeconds(0.4);
         private readonly TimeSpan _fadeOutDuration = TimeSpan.FromSeconds(0.2);
         private readonly TimeSpan _displayDuration = TimeSpan.FromSeconds(8);
+        private readonly int _rightOffset = 8;
+        private readonly int _topOffset = 28;
+        private readonly int _maxNumNotifications = 5;
 
         public NotificationController() {
-            _numNotifications = 0;
+            _availableNotificationSpots = new bool[_maxNumNotifications];
+            for (int i = 0; i < _maxNumNotifications; ++i)
+            {
+                _availableNotificationSpots[i] = true;
+            }
             _screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
             _screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
         }
@@ -35,12 +42,27 @@ namespace Triggr.Events.Reaction
             var nHeight = notificationWindow.Height;
             var nWidth = notificationWindow.Width;
 
-            notificationWindow.Left = _screenWidth - nWidth - 8;
-            notificationWindow.Top = 38 + _numNotifications * 40;
+            var notificationSpot = -1;
+            for (int i = 0; i < _maxNumNotifications; ++i) {
+                if (_availableNotificationSpots[i]) {
+                    notificationSpot = i;
+                    break;
+                }
+            }   
+            if(notificationSpot == -1) {
+                for (int i = 0; i < _maxNumNotifications; ++i)
+                {
+                    _availableNotificationSpots[i] = true;
+                }
+                notificationSpot = 0;
+            }
+
+            notificationWindow.Left = _screenWidth - nWidth - _rightOffset;
+            notificationWindow.Top = _topOffset + notificationSpot * 90;
 
             notificationWindow.Opacity = 0;
             notificationWindow.Show();
-            _numNotifications++;
+            _availableNotificationSpots[notificationSpot] = false;
 
             var showAnimation = new DoubleAnimation(0, 1, (Duration)_fadeInDuration);
             showAnimation.Completed += (s1, e1) =>
@@ -53,7 +75,7 @@ namespace Triggr.Events.Reaction
                     {
                         notificationWindow.Hide();
                         notificationWindow.Close();
-                        _numNotifications--;
+                        _availableNotificationSpots[notificationSpot] = true;
                     };
                     notificationWindow.BeginAnimation(UIElement.OpacityProperty, hideAnimation);
                 };

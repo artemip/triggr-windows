@@ -27,7 +27,7 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://www.triggrapp.com/download/test/current/</InstallUrl>
-    <UpdateUrl>http://www.triggrapp.com/download/test/update/</UpdateUrl>
+    <UpdateUrl>http://www.triggrapp.com/download/test/current/</UpdateUrl>
     <SupportUrl>http://www.fether.co</SupportUrl>
     <TargetCulture>en</TargetCulture>
     <ProductName>Triggr</ProductName>
@@ -35,8 +35,8 @@
     <MinimumRequiredVersion>1.1.1.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>2.0.0.2</ApplicationVersion>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>2.0.0.3</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -231,6 +231,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Sounds\notification.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

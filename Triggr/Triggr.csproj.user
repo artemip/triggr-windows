@@ -4,7 +4,7 @@
     <PublishUrlHistory>publish\</PublishUrlHistory>
     <InstallUrlHistory>http://www.triggrapp.com/download/test/current/|http://www.triggrapp.com/download/current/|http://www.triggrapp.com/download/clickonce/</InstallUrlHistory>
     <SupportUrlHistory>http://www.fether.co</SupportUrlHistory>
-    <UpdateUrlHistory>http://www.triggrapp.com/download/update/</UpdateUrlHistory>
+    <UpdateUrlHistory>http://www.triggrapp.com/download/test/update/|http://www.triggrapp.com/download/update/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
