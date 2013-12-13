@@ -51,7 +51,7 @@ namespace Triggr.Networking
         {
             if (_started) return true;
 
-            _socket = SocketUtils.OpenSocketConnection("ec2-107-21-171-184.compute-1.amazonaws.com", 9090);
+            _socket = SocketUtils.OpenSocketConnection("test.triggrapp.com", 9090);
 
             if (_socket == null)
             {
