@@ -13,8 +13,6 @@ namespace Triggr.Events.Reaction
     public class NotificationController
     {
         private bool[] _availableNotificationSpots;
-        private double _screenWidth;
-        private double _screenHeight;
         private readonly TimeSpan _fadeInDuration = TimeSpan.FromSeconds(0.4);
         private readonly TimeSpan _fadeOutDuration = TimeSpan.FromSeconds(0.2);
         private readonly TimeSpan _displayDuration = TimeSpan.FromSeconds(8);
@@ -28,8 +26,6 @@ namespace Triggr.Events.Reaction
             {
                 _availableNotificationSpots[i] = true;
             }
-            _screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
-            _screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
         }
 
         public void notify(Notification notification)
@@ -38,6 +34,9 @@ namespace Triggr.Events.Reaction
 
             var notificationViewModel = new NotificationViewModel(notification);
             var notificationWindow = new NotificationWindow(notificationViewModel);
+
+            var screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            var screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
 
             var nHeight = notificationWindow.Height;
             var nWidth = notificationWindow.Width;
@@ -57,7 +56,7 @@ namespace Triggr.Events.Reaction
                 notificationSpot = 0;
             }
 
-            notificationWindow.Left = _screenWidth - nWidth - _rightOffset;
+            notificationWindow.Left = screenWidth - nWidth - _rightOffset;
             notificationWindow.Top = _topOffset + notificationSpot * 90;
 
             notificationWindow.Opacity = 0;

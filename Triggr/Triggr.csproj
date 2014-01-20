@@ -27,7 +27,7 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://www.triggrapp.com/download/test/current/</InstallUrl>
-    <UpdateUrl>http://www.triggrapp.com/download/test/current/</UpdateUrl>
+    <UpdateUrl>http://www.triggrapp.com/download/test/update/</UpdateUrl>
     <SupportUrl>http://www.fether.co</SupportUrl>
     <TargetCulture>en</TargetCulture>
     <ProductName>Triggr</ProductName>
@@ -35,8 +35,8 @@
     <MinimumRequiredVersion>1.1.1.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>2.0.0.4</ApplicationVersion>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -69,11 +69,10 @@
     <ApplicationIcon>triggr_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>3B272346C7AEC07CE13E65B3BD18A2B9E690CC90</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>FC79EA455C9EACACFFBAFD2893D9C3F18C4481A9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>Triggr_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -196,6 +195,7 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="triggr.pfx" />
+    <None Include="Triggr_TemporaryKey.pfx" />
     <Resource Include="Resources\Fonts\Windsong.ttf" />
     <Resource Include="Resources\Fonts\OpenSans-Italic.ttf" />
   </ItemGroup>
