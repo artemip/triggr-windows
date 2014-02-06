@@ -36,6 +36,7 @@ namespace Triggr.Networking
         private Socket _socket;
         private bool _started;
         private SocketMessageHandler _socketMessageHandler;
+        private Timer _heartbeatTimer;
 
         public SocketServer(SocketMessageHandler socketMessageHandler)
         {
@@ -51,7 +52,7 @@ namespace Triggr.Networking
         {
             if (_started) return true;
 
-            _socket = SocketUtils.OpenSocketConnection("test.triggrapp.com", 9090);
+            _socket = SocketUtils.OpenSocketConnection("api.triggrapp.com", 9090);
 
             if (_socket == null)
             {
@@ -67,6 +68,8 @@ namespace Triggr.Networking
             _socket.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state);
 
             SendHandshake();
+
+            StartHeartbeat();
             
             return true;
         }
@@ -146,6 +149,14 @@ namespace Triggr.Networking
             }
         }
 
+        private void StartHeartbeat()
+        {
+            _heartbeatTimer = new Timer(t =>
+            {
+                SendHeartbeat();
+            }, null, 0, (new Random()).Next(30000, 60000)); //Retry every 30 - 60 seconds (avoid server load)
+        }
+
         private string CreateJSONRequest(ServerRequest request)
         {
             var memStream = new MemoryStream();
@@ -166,6 +177,12 @@ namespace Triggr.Networking
         private void SendHandshake()
         {
             var request = new ServerRequest("register_device", TriggrViewModel.DeviceID);
+            Send(CreateJSONRequest(request) + "\r\n");
+        }
+
+        private void SendHeartbeat()
+        {
+            var request = new ServerRequest("heartbeat", "");
             Send(CreateJSONRequest(request) + "\r\n");
         }
 
